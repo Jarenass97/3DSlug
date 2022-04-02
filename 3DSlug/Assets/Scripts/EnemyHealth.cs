@@ -29,11 +29,11 @@ public class EnemyHealth : MonoBehaviour
         
     }
 
-    public void recibeDaño(int daño)
+    public void recibeDamage(int damage)
     {
         if (!isDead)
         {
-            vidaActual -= daño;
+            vidaActual -= damage;
             if (vidaActual < 0) vidaActual = 0;
             else if (vidaActual > vidaMaxima) vidaActual = vidaMaxima;
             StartCoroutine(damageAnim());

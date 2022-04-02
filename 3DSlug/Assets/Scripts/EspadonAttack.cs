@@ -31,7 +31,7 @@ public class EspadonAttack : MonoBehaviour
                 if (attacking)
                 {                    
                     EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
-                    enemyHealth.recibeDaño(20);
+                    enemyHealth.recibeDamage(20);
                 }
             }
         }

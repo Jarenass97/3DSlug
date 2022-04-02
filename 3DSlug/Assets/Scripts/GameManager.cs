@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameObject GamePanel;
     public GameObject GameOverPanel;
     public GameObject GameIntroPanel;
+    public GameObject GamePausePanel;
     public GameObject GameWinPanel;
     public GameObject menuPpal;
     public GameObject menuDiff;
@@ -32,8 +33,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         tpc = GameObject.Find("PlayerArmature").GetComponent<ThirdPersonController>();
-        txtButtonDificultad.text = "Dificultad: Fácil";
-        //comenzarPartida();//borrar
+        txtButtonDificultad.text = "Dificultad: Fï¿½cil";
+        comenzarPartida();//TODO borrar
     }
 
     void Update()
@@ -144,7 +145,7 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         GamePanel.SetActive(false);
         GameOverPanel.SetActive(true);
-        resultadoPartida.text = "Has llegado a la ronda " + ronda + ", ¡Vuelve a intentarlo!";
+        resultadoPartida.text = "Has llegado a la ronda " + ronda + ", ï¿½Vuelve a intentarlo!";
         tpc.enabled = false;
     }
 
@@ -170,7 +171,7 @@ public class GameManager : MonoBehaviour
 
     public void easy()
     {
-        txtButtonDificultad.text = "Dificultad: Fácil";
+        txtButtonDificultad.text = "Dificultad: Fï¿½cil";
         dificultad = 1;
         menuDiff.SetActive(false);
         menuPpal.SetActive(true);
@@ -190,6 +191,12 @@ public class GameManager : MonoBehaviour
         dificultad = 3;
         menuDiff.SetActive(false);
         menuPpal.SetActive(true);
+    }
+
+    public void pauseGame(){
+        GamePanel.SetActive(false);
+        GamePausePanel.SetActive(true);
+        Time.timeScale = 0;
     }
 
 }

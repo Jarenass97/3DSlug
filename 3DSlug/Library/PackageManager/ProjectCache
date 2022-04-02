@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637815620000586699
-    m_Hash: 3220546015
+      ticks: 637839953185696247
+    m_Hash: 4124839376
   m_LockFileStatus:
     m_FilePath: C:/Users/jorge/Desktop/Jorge Arenas/DAM2/PMDM/Unity/Proyecto/3DSlug/3DSlug/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637815620001806514
-    m_Hash: 1022461936
+      ticks: 637839953185706245
+    m_Hash: 1302522905
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -470,6 +470,7 @@ m_PackageAssets:
         - 2.0.11
         - 2.0.12
         - 2.0.14
+        - 2.0.15
         compatible:
         - 1.0.2
         - 1.0.3
@@ -488,7 +489,8 @@ m_PackageAssets:
         - 2.0.11
         - 2.0.12
         - 2.0.14
-        verified: 2.0.14
+        - 2.0.15
+        verified: 2.0.15
       dependencies:
       - name: com.unity.test-framework
         version: 1.1.9
