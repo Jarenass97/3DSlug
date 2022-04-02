@@ -38997,7 +38997,7 @@ MonoBehaviour:
   GamePanel: {fileID: 1628614054}
   GameOverPanel: {fileID: 1051395649}
   GameIntroPanel: {fileID: 2079945310}
-  GamePausePanel: {fileID: 0}
+  GamePausePanel: {fileID: 4804737918816351921}
   GameWinPanel: {fileID: 4804737918816351918}
   menuPpal: {fileID: 904920155}
   menuDiff: {fileID: 1836652716}
@@ -53466,11 +53466,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 617696495895580985, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
       propertyPath: m_text
-      value: Guardar y Salir
+      value: Guardar partida
       objectReference: {fileID: 0}
     - target: {fileID: 821020229275893498, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
       propertyPath: m_Name
-      value: txtButtonSalir
+      value: txtButtonGuardar
       objectReference: {fileID: 0}
     - target: {fileID: 1654244590628822657, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
       propertyPath: m_text
@@ -53514,7 +53514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2517334649568110400, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
       propertyPath: m_Name
-      value: btnSalir
+      value: btnGuardar
       objectReference: {fileID: 0}
     - target: {fileID: 2615510697415128219, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -57306,6 +57306,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 431.46
       objectReference: {fileID: 0}
+    - target: {fileID: 6133878346381335869, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1563439962}
+    - target: {fileID: 6133878346381335869, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: reanudarGame
+      objectReference: {fileID: 0}
     - target: {fileID: 6517104395305697576, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -57317,6 +57325,10 @@ PrefabInstance:
     - target: {fileID: 7562083711512443928, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
       propertyPath: buttonClickOutputEvent.m_PersistentCalls.m_Calls.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562083711512443928, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
+      propertyPath: buttonStateOutputEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7562083711512443928, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
       propertyPath: buttonClickOutputEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -57353,6 +57365,14 @@ PrefabInstance:
     - target: {fileID: 7620268217329115908, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
       propertyPath: m_Color.r
       value: 0.46226418
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996441834644850535, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1563439962}
+    - target: {fileID: 7996441834644850535, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: save
       objectReference: {fileID: 0}
     - target: {fileID: 8085868219510882272, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -57423,3 +57443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4804737918816351921 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9222086854722376520, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
+  m_PrefabInstance: {fileID: 4804737918816351917}
+  m_PrefabAsset: {fileID: 0}

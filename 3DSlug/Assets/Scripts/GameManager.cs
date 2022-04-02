@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 using TMPro;
 using UnityEngine.SceneManagement;
 using StarterAssets;
@@ -32,9 +34,21 @@ public class GameManager : MonoBehaviour
     private int dificultad = 1;
     void Start()
     {
+        comprobarDatosGuardados();
         tpc = GameObject.Find("PlayerArmature").GetComponent<ThirdPersonController>();
-        txtButtonDificultad.text = "Dificultad: F�cil";
-        comenzarPartida();//TODO borrar
+        txtButtonDificultad.text = "Dificultad: Fácil";
+        //comenzarPartida();//TODO borrar
+    }
+    private void comprobarDatosGuardados()
+    {
+        if (File.Exists(Application.persistentDataPath + "/savedGames.gd"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/savedGames.gd", FileMode.Open);
+            Scene scene = (Scene)bf.Deserialize(file);
+            file.Close();
+            SceneManager.SetActiveScene(scene);
+        }
     }
 
     void Update()
@@ -65,7 +79,7 @@ public class GameManager : MonoBehaviour
         GamePanel.SetActive(false);
         destroyEnemies();
     }
-    
+
     private void destroyEnemies()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
@@ -85,7 +99,7 @@ public class GameManager : MonoBehaviour
         {
             if (respawns.Count == 0) respawns = new ArrayList(enemyRespawnPoints);
             int enemyIndex = Random.Range(0, enemies.Length);
-            respawnPoint = (GameObject) respawns[Random.Range(0, respawns.Count)];
+            respawnPoint = (GameObject)respawns[Random.Range(0, respawns.Count)];
             respawns.Remove(respawnPoint);
             Instantiate(
                 enemies[enemyIndex],
@@ -145,7 +159,7 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         GamePanel.SetActive(false);
         GameOverPanel.SetActive(true);
-        resultadoPartida.text = "Has llegado a la ronda " + ronda + ", �Vuelve a intentarlo!";
+        resultadoPartida.text = "Has llegado a la ronda " + ronda + ", ¡Vuelve a intentarlo!";
         tpc.enabled = false;
     }
 
@@ -160,8 +174,8 @@ public class GameManager : MonoBehaviour
         GamePanel.SetActive(true);
         isInGame = true;
         nextLevel();
-        StartCoroutine(generateHealthy());        
-    }    
+        StartCoroutine(generateHealthy());
+    }
 
     public void elegirDificultad()
     {
@@ -171,7 +185,7 @@ public class GameManager : MonoBehaviour
 
     public void easy()
     {
-        txtButtonDificultad.text = "Dificultad: F�cil";
+        txtButtonDificultad.text = "Dificultad: Fácil";
         dificultad = 1;
         menuDiff.SetActive(false);
         menuPpal.SetActive(true);
@@ -193,10 +207,27 @@ public class GameManager : MonoBehaviour
         menuPpal.SetActive(true);
     }
 
-    public void pauseGame(){
+    public void pauseGame() {
         GamePanel.SetActive(false);
         GamePausePanel.SetActive(true);
         Time.timeScale = 0;
     }
 
+    public void reanudarGame()
+    {
+        GamePanel.SetActive(true);
+        GamePausePanel.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void save()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/savedGames.gd");
+        bf.Serialize(file, scene);
+        file.Close();
+        GamePanel.SetActive(true);
+        GamePausePanel.SetActive(false);
+    }
 }
