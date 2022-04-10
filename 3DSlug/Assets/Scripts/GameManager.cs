@@ -34,26 +34,11 @@ public class GameManager : MonoBehaviour
     private int dificultad = 1;
     void Start()
     {
-        comprobarDatosGuardados();
+        SaveLoad.Load();
+        save();
         tpc = GameObject.Find("PlayerArmature").GetComponent<ThirdPersonController>();
         txtButtonDificultad.text = "Dificultad: Fácil";
         //comenzarPartida();//TODO borrar
-    }
-    private void comprobarDatosGuardados()
-    {
-        if (File.Exists(Application.persistentDataPath + "/savedGames.gd"))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/savedGames.gd", FileMode.Open);
-            Scene scene = (Scene)bf.Deserialize(file);
-            file.Close();
-            SceneManager.SetActiveScene(scene);
-        }
-    }
-
-    void Update()
-    {
-
     }
 
     private void nextLevel()
@@ -161,6 +146,7 @@ public class GameManager : MonoBehaviour
         GameOverPanel.SetActive(true);
         resultadoPartida.text = "Has llegado a la ronda " + ronda + ", ¡Vuelve a intentarlo!";
         tpc.enabled = false;
+        SaveLoad.deleteFile();
     }
 
     public void RestartGame()
@@ -222,12 +208,6 @@ public class GameManager : MonoBehaviour
 
     public void save()
     {
-        Scene scene = SceneManager.GetActiveScene();
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/savedGames.gd");
-        bf.Serialize(file, scene);
-        file.Close();
-        GamePanel.SetActive(true);
-        GamePausePanel.SetActive(false);
+        SaveLoad.Save();
     }
 }
