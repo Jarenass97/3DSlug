@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - Assets.Scripts.SQLite
     - BasicRigidBodyPush
     - EnemyHealth
     - EnemyMovement
@@ -24,8 +25,6 @@ ScriptsOnlyBuild:
     - Cinemachine.CinemachinePipeline
     - Cinemachine.CinemachineVirtualCamera
     - Cinemachine.NoiseSettings
-    Unity.CollabProxy.Editor.dll:
-    - Unity.Cloud.Collaborate.UserInterface.WindowCache
     Unity.InputSystem.dll:
     - UnityEngine.InputSystem.InputActionAsset
     - UnityEngine.InputSystem.InputActionReference
@@ -45,8 +44,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -109,77 +110,79 @@ ScriptsOnlyBuild:
     - Class: 111
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1506}
+      Script: {instanceID: 1500}
     - Class: 114
-      Script: {instanceID: 1508}
+      Script: {instanceID: 1502}
     - Class: 114
-      Script: {instanceID: 5614}
+      Script: {instanceID: 1558}
     - Class: 114
-      Script: {instanceID: 5924}
+      Script: {instanceID: 1874}
     - Class: 114
-      Script: {instanceID: 6004}
+      Script: {instanceID: 1956}
     - Class: 114
-      Script: {instanceID: 6158}
+      Script: {instanceID: 2110}
     - Class: 114
-      Script: {instanceID: 6182}
+      Script: {instanceID: 2134}
     - Class: 114
-      Script: {instanceID: 6282}
+      Script: {instanceID: 2234}
     - Class: 114
-      Script: {instanceID: 6630}
+      Script: {instanceID: 2584}
     - Class: 114
-      Script: {instanceID: 6670}
+      Script: {instanceID: 2624}
     - Class: 114
-      Script: {instanceID: 6760}
+      Script: {instanceID: 2718}
     - Class: 114
-      Script: {instanceID: 6834}
+      Script: {instanceID: 2792}
     - Class: 114
-      Script: {instanceID: 6842}
+      Script: {instanceID: 2800}
     - Class: 114
-      Script: {instanceID: 6870}
+      Script: {instanceID: 2830}
     - Class: 114
-      Script: {instanceID: 6890}
+      Script: {instanceID: 2852}
     - Class: 114
-      Script: {instanceID: 6896}
+      Script: {instanceID: 2860}
     - Class: 114
-      Script: {instanceID: 6916}
+      Script: {instanceID: 2880}
     - Class: 114
-      Script: {instanceID: 7198}
+      Script: {instanceID: 3162}
     - Class: 114
-      Script: {instanceID: 7394}
+      Script: {instanceID: 3358}
     - Class: 114
-      Script: {instanceID: 7412}
+      Script: {instanceID: 3376}
     - Class: 114
-      Script: {instanceID: 7586}
+      Script: {instanceID: 3550}
     - Class: 114
-      Script: {instanceID: 7632}
+      Script: {instanceID: 3596}
     - Class: 114
-      Script: {instanceID: 7696}
+      Script: {instanceID: 3660}
     - Class: 114
-      Script: {instanceID: 7710}
+      Script: {instanceID: 3674}
     - Class: 114
-      Script: {instanceID: 7836}
+      Script: {instanceID: 3800}
     - Class: 114
-      Script: {instanceID: 7906}
+      Script: {instanceID: 3870}
     - Class: 114
-      Script: {instanceID: 8134}
+      Script: {instanceID: 4098}
     - Class: 114
-      Script: {instanceID: 8160}
+      Script: {instanceID: 4124}
     - Class: 114
-      Script: {instanceID: 8166}
+      Script: {instanceID: 4130}
     - Class: 114
-      Script: {instanceID: 8518}
+      Script: {instanceID: 4490}
     - Class: 114
-      Script: {instanceID: 8558}
+      Script: {instanceID: 4532}
     - Class: 114
-      Script: {instanceID: 8682}
+      Script: {instanceID: 4656}
     - Class: 114
-      Script: {instanceID: 8734}
+      Script: {instanceID: 4708}
     - Class: 114
-      Script: {instanceID: 8736}
+      Script: {instanceID: 4710}
     - Class: 114
-      Script: {instanceID: 9024}
+      Script: {instanceID: 5000}
     - Class: 114
-      Script: {instanceID: 9242}
+      Script: {instanceID: 5220}
+    - Class: 114
+      Script: {instanceID: 23224}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1253,6 +1256,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GunAim
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: Assets.Scripts
+    className: SQLite
   platform: 13
   scenePathNames:
   - Assets/Scenes/Graveyard.unity
