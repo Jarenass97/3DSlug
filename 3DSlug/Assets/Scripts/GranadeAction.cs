@@ -60,7 +60,7 @@ public class GranadeAction : MonoBehaviour
         if (other.CompareTag("enemy"))
         {            
             EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
-            enemyHealth.recibeDaño(50);
+            enemyHealth.recibeDamage(50);
         }
     }
 

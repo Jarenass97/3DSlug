@@ -139,7 +139,7 @@ namespace StarterAssets
         public TextMeshProUGUI contadorGranadas;
         private void launch()
         {
-            if (_input.launch && !isLaunching /*&& numGranadas>0*/)
+            if (_input.launch && !isLaunching /*&& numGranadas>0*/)//TODO descomentar
             {
                 numGranadas--;
                 contadorGranadas.text = numGranadas.ToString();

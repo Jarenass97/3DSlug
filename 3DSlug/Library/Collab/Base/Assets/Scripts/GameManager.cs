@@ -12,10 +12,13 @@ public class GameManager : MonoBehaviour
     public GameObject[] healthyRespawnPoints;
     public GameObject healthyObject;
     private int numEnemies = 0;
-    private int ronda = 0;
+    private int ronda = 99;
+    private int rondaFinal = 100;
     public GameObject GamePanel;
     public GameObject GameOverPanel;
     public GameObject GameIntroPanel;
+    public GameObject GamePausePanel;
+    public GameObject GameWinPanel;
     public GameObject menuPpal;
     public GameObject menuDiff;
     public TextMeshProUGUI contadorEnemigos;
@@ -30,8 +33,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         tpc = GameObject.Find("PlayerArmature").GetComponent<ThirdPersonController>();
-        txtButtonDificultad.text = "Dificultad: Fácil";
-        comenzarPartida();//borrar
+        txtButtonDificultad.text = "Dificultad: Fï¿½cil";
+        comenzarPartida();//TODO borrar
     }
 
     void Update()
@@ -44,23 +47,50 @@ public class GameManager : MonoBehaviour
         if (!isGameOver && isInGame)
         {
             ronda++;
-            numEnemies = Random.Range(dificultad * ronda, (2 * dificultad * ronda) + 1);
-            contadorEnemigos.text = "Enemigos: " + numEnemies;
-            contadorRondas.text = "Ronda: " + ronda;
-            respawnEnemies();
+            if (ronda <= rondaFinal)
+            {
+                numEnemies = Random.Range(dificultad * ronda, (2 * dificultad * ronda) + 1);
+                contadorEnemigos.text = "Enemigos: " + numEnemies;
+                contadorRondas.text = "Ronda: " + ronda;
+                respawnEnemies();
+            }
+            else finGame();
         }
+    }
+
+    private void finGame()
+    {
+        isInGame = false;
+        GameWinPanel.SetActive(true);
+        GamePanel.SetActive(false);
+        destroyEnemies();
+    }
+    
+    private void destroyEnemies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+        foreach (GameObject e in enemies) Destroy(e.gameObject);
+    }
+
+    public bool isGamePlay()
+    {
+        return isInGame;
     }
 
     private void respawnEnemies()
     {
+        ArrayList respawns = new ArrayList(enemyRespawnPoints);
+        GameObject respawnPoint;
         for (int i = 0; i < numEnemies; i++)
         {
+            if (respawns.Count == 0) respawns = new ArrayList(enemyRespawnPoints);
             int enemyIndex = Random.Range(0, enemies.Length);
-            int respawnPointIndex = Random.Range(0, enemyRespawnPoints.Length);
+            respawnPoint = (GameObject) respawns[Random.Range(0, respawns.Count)];
+            respawns.Remove(respawnPoint);
             Instantiate(
                 enemies[enemyIndex],
-                enemyRespawnPoints[respawnPointIndex].transform.position,
-                enemyRespawnPoints[respawnPointIndex].transform.rotation
+                respawnPoint.transform.position,
+                respawnPoint.transform.rotation
                 );
         }
     }
@@ -115,7 +145,7 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         GamePanel.SetActive(false);
         GameOverPanel.SetActive(true);
-        resultadoPartida.text = "Has llegado a la ronda " + ronda + ", ¡Vuelve a intentarlo!";
+        resultadoPartida.text = "Has llegado a la ronda " + ronda + ", ï¿½Vuelve a intentarlo!";
         tpc.enabled = false;
     }
 
@@ -130,8 +160,8 @@ public class GameManager : MonoBehaviour
         GamePanel.SetActive(true);
         isInGame = true;
         nextLevel();
-        StartCoroutine(generateHealthy());
-    }
+        StartCoroutine(generateHealthy());        
+    }    
 
     public void elegirDificultad()
     {
@@ -141,7 +171,7 @@ public class GameManager : MonoBehaviour
 
     public void easy()
     {
-        txtButtonDificultad.text = "Dificultad: Fácil";
+        txtButtonDificultad.text = "Dificultad: Fï¿½cil";
         dificultad = 1;
         menuDiff.SetActive(false);
         menuPpal.SetActive(true);
@@ -161,6 +191,12 @@ public class GameManager : MonoBehaviour
         dificultad = 3;
         menuDiff.SetActive(false);
         menuPpal.SetActive(true);
+    }
+
+    public void pauseGame(){
+        GamePanel.SetActive(false);
+        GamePausePanel.SetActive(true);
+        Time.timeScale = 0;
     }
 
 }

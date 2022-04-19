@@ -14,9 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
+    - Assets/Model/Materials.meta
+    - Assets/Model/Materials/Accessories_Color.mat
+    - Assets/Model/Materials/Accessories_Color.mat.meta
+    - Assets/Model/Materials/Body_Color.mat
+    - Assets/Model/Materials/Body_Color.mat.meta
+    - Assets/Model/Materials/lambert1.mat
+    - Assets/Model/Materials/lambert1.mat.meta
+    - Assets/Player/ThirdPersonController/Scripts/ThirdPersonController.cs
+    - Assets/Prefabs/Player.prefab
+    - Assets/Scenes/Graveyard.unity
     - Assets/Scripts/GameManager.cs
+    - Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+    - Assets/Textures/UI_Icon_Pause.png.meta
     - 
-    m_Values: 0000
+    m_Values: 0101010101010101010101010101
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 
