@@ -1,0 +1,7 @@
+*.docx
+
+.vs/slnx.sqlite
+
+.vs/slnx.sqlite-journal
+
+*.tmp
