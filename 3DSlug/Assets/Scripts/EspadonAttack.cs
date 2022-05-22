@@ -5,12 +5,12 @@ using UnityEngine;
 public class EspadonAttack : MonoBehaviour
 {
     private bool attacking = false;
-    private HealthBar health;
+    private PlayerManager health;
     private AudioSource audio;
 
     private void Start()
     {
-        health = GameObject.Find("PlayerArmature").GetComponent<HealthBar>();
+        health = GameObject.Find("PlayerArmature").GetComponent<PlayerManager>();
         audio = GetComponent<AudioSource>();
     }
     

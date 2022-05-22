@@ -8,7 +8,7 @@ public class EnemyHealth : MonoBehaviour
     public int vidaMaxima = 25;
     private int vidaActual;
     private Animator animator;
-    private EnemyMovement enemyMovement;
+    private zombieMovement enemyMovement;
     private GameManager gameManager;
     private GameObject Player;
     private ThirdPersonController tpc;
@@ -17,7 +17,7 @@ public class EnemyHealth : MonoBehaviour
     {
         vidaActual = vidaMaxima;
         animator = GetComponent<Animator>();
-        enemyMovement = GetComponent<EnemyMovement>();
+        enemyMovement = GetComponent<zombieMovement>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Player = GameObject.Find("PlayerArmature");
         tpc = Player.GetComponent<ThirdPersonController>();

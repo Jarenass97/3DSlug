@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] healthyRespawnPoints;
     public GameObject healthyObject;
     private int numEnemies = 0;
-    private int ronda = 99;
+    private int ronda = 1;
     private int rondaFinal = 100;
     public GameObject GamePanel;
     public GameObject GameOverPanel;
@@ -37,7 +37,6 @@ public class GameManager : MonoBehaviour
         comprobarDatosGuardados();
         tpc = GameObject.Find("PlayerArmature").GetComponent<ThirdPersonController>();
         txtButtonDificultad.text = "Dificultad: Fácil";
-        //comenzarPartida();//TODO borrar
     }
     private void comprobarDatosGuardados()
     {
@@ -59,14 +58,14 @@ public class GameManager : MonoBehaviour
     private void nextLevel()
     {
         if (!isGameOver && isInGame)
-        {
-            ronda++;
+        {            
             if (ronda <= rondaFinal)
             {
                 numEnemies = Random.Range(dificultad * ronda, (2 * dificultad * ronda) + 1);
                 contadorEnemigos.text = "Enemigos: " + numEnemies;
                 contadorRondas.text = "Ronda: " + ronda;
                 respawnEnemies();
+                ronda++;
             }
             else finGame();
         }
@@ -229,5 +228,6 @@ public class GameManager : MonoBehaviour
         file.Close();
         GamePanel.SetActive(true);
         GamePausePanel.SetActive(false);
+        Time.timeScale = 1;
     }
 }

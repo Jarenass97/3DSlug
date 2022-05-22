@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 using TMPro;
@@ -36,6 +37,14 @@ namespace StarterAssets
         [Space(10)]
         [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
         public float JumpTimeout = 0.50f;
+
+        public GameObject portaPistola;
+        internal void equiparArma(GameObject arma)
+        {
+            hacha.SetActive(false);
+            Instantiate(arma, portaPistola.transform);
+        }
+
         [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
         public float FallTimeout = 0.15f;
 
@@ -115,12 +124,12 @@ namespace StarterAssets
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
             espadonAttack = GameObject.Find("hacha").GetComponent<EspadonAttack>();
-            AssignAnimationIDs();            
+            AssignAnimationIDs();
 
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
-            avisoConseguirGranada.enabled = false;
+            msg.enabled = false;
         }
 
         private void Update()
@@ -147,22 +156,16 @@ namespace StarterAssets
                 StartCoroutine(LaunchAnim());
             }
         }
-        public TextMeshProUGUI avisoConseguirGranada;
-        private Animator animText;
         public void addGranadas()
         {
             numGranadas++;
             contadorGranadas.text = numGranadas.ToString();
-            animText = avisoConseguirGranada.GetComponent<Animator>();
-            StartCoroutine(animacionTexto());
+            mostrarMensaje("¡Has conseguido 1 granada!");
         }
-        IEnumerator animacionTexto()
+        public TextMeshProUGUI msg;
+        private void mostrarMensaje(string mensaje)
         {
-            avisoConseguirGranada.enabled = true;
-            animText.SetBool("mostrar", true);
-            yield return new WaitForSeconds(2);
-            animText.SetBool("mostrar", false);
-            avisoConseguirGranada.enabled = false;
+            msg.GetComponent<Mensaje>().mostrar(mensaje);
         }
 
         private bool isAttacking = false;
@@ -181,20 +184,20 @@ namespace StarterAssets
         public GameObject hacha;
         public GameObject mano;
         IEnumerator LaunchAnim()
-        {           
+        {
             _animator.avatar = attackAvatar;
-            _animator.SetBool("isAttacking", true);            
+            _animator.SetBool("isAttacking", true);
             hacha.SetActive(false);
-            yield return new WaitForSeconds(0.4f);            
+            yield return new WaitForSeconds(0.4f);
             Instantiate(granada, mano.transform.position, transform.rotation);
             yield return new WaitForSeconds(0.6f);
-            hacha.SetActive(true);            
+            hacha.SetActive(true);
             _animator.SetBool("isAttacking", false);
             _animator.avatar = movementAvatar;
             isLaunching = false;
         }
         IEnumerator AttackAnim()
-        {            
+        {
             _animator.avatar = attackAvatar;
             _animator.SetBool("isAttacking", true);
             espadonAttack.growl();

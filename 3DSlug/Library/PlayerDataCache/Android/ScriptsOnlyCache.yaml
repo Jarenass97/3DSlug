@@ -3,20 +3,22 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - BasicRigidBodyPush
     - EnemyHealth
-    - EnemyMovement
     - EspadonAttack
     - GameManager
     - GranadeAction
-    - HealthBar
     - HealthyProperties
     - Limit
+    - Mensaje
     - MobileDisableAutoSwitchControls
+    - PlayerManager
+    - Shop
     - StarterAssets.StarterAssetsInputs
     - StarterAssets.ThirdPersonController
     - StarterAssets.UICanvasControllerInput
     - Teleport
     - UIVirtualButton
     - UIVirtualJoystick
+    - zombieMovement
     Cinemachine.dll:
     - Cinemachine.Cinemachine3rdPersonFollow
     - Cinemachine.CinemachineBasicMultiChannelPerlin
@@ -24,8 +26,6 @@ ScriptsOnlyBuild:
     - Cinemachine.CinemachinePipeline
     - Cinemachine.CinemachineVirtualCamera
     - Cinemachine.NoiseSettings
-    Unity.CollabProxy.Editor.dll:
-    - Unity.Cloud.Collaborate.UserInterface.WindowCache
     Unity.InputSystem.dll:
     - UnityEngine.InputSystem.InputActionAsset
     - UnityEngine.InputSystem.InputActionReference
@@ -45,8 +45,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -109,77 +111,81 @@ ScriptsOnlyBuild:
     - Class: 111
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1506}
+      Script: {instanceID: 1500}
     - Class: 114
-      Script: {instanceID: 1508}
+      Script: {instanceID: 1502}
     - Class: 114
-      Script: {instanceID: 5614}
+      Script: {instanceID: 1558}
     - Class: 114
-      Script: {instanceID: 5924}
+      Script: {instanceID: 1874}
     - Class: 114
-      Script: {instanceID: 6004}
+      Script: {instanceID: 1956}
     - Class: 114
-      Script: {instanceID: 6158}
+      Script: {instanceID: 2110}
     - Class: 114
-      Script: {instanceID: 6182}
+      Script: {instanceID: 2134}
     - Class: 114
-      Script: {instanceID: 6282}
+      Script: {instanceID: 2234}
     - Class: 114
-      Script: {instanceID: 6630}
+      Script: {instanceID: 2584}
     - Class: 114
-      Script: {instanceID: 6670}
+      Script: {instanceID: 2624}
     - Class: 114
-      Script: {instanceID: 6760}
+      Script: {instanceID: 2674}
     - Class: 114
-      Script: {instanceID: 6834}
+      Script: {instanceID: 2720}
     - Class: 114
-      Script: {instanceID: 6842}
+      Script: {instanceID: 2794}
     - Class: 114
-      Script: {instanceID: 6870}
+      Script: {instanceID: 2802}
     - Class: 114
-      Script: {instanceID: 6890}
+      Script: {instanceID: 2832}
     - Class: 114
-      Script: {instanceID: 6896}
+      Script: {instanceID: 2854}
     - Class: 114
-      Script: {instanceID: 6916}
+      Script: {instanceID: 2862}
     - Class: 114
-      Script: {instanceID: 7198}
+      Script: {instanceID: 2882}
     - Class: 114
-      Script: {instanceID: 7394}
+      Script: {instanceID: 3164}
     - Class: 114
-      Script: {instanceID: 7412}
+      Script: {instanceID: 3360}
     - Class: 114
-      Script: {instanceID: 7586}
+      Script: {instanceID: 3378}
     - Class: 114
-      Script: {instanceID: 7632}
+      Script: {instanceID: 3552}
     - Class: 114
-      Script: {instanceID: 7696}
+      Script: {instanceID: 3598}
     - Class: 114
-      Script: {instanceID: 7710}
+      Script: {instanceID: 3662}
     - Class: 114
-      Script: {instanceID: 7836}
+      Script: {instanceID: 3676}
     - Class: 114
-      Script: {instanceID: 7906}
+      Script: {instanceID: 3802}
     - Class: 114
-      Script: {instanceID: 8134}
+      Script: {instanceID: 3872}
     - Class: 114
-      Script: {instanceID: 8160}
+      Script: {instanceID: 4100}
     - Class: 114
-      Script: {instanceID: 8166}
+      Script: {instanceID: 4126}
     - Class: 114
-      Script: {instanceID: 8518}
+      Script: {instanceID: 4132}
     - Class: 114
-      Script: {instanceID: 8558}
+      Script: {instanceID: 4492}
     - Class: 114
-      Script: {instanceID: 8682}
+      Script: {instanceID: 4534}
     - Class: 114
-      Script: {instanceID: 8734}
+      Script: {instanceID: 4658}
     - Class: 114
-      Script: {instanceID: 8736}
+      Script: {instanceID: 4710}
     - Class: 114
-      Script: {instanceID: 9024}
+      Script: {instanceID: 4712}
     - Class: 114
-      Script: {instanceID: 9242}
+      Script: {instanceID: 5002}
+    - Class: 114
+      Script: {instanceID: 5222}
+    - Class: 114
+      Script: {instanceID: 230542}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -491,6 +497,12 @@ ScriptsOnlyBuild:
     assemblyName: Cinemachine.dll
     namespaceName: Cinemachine
     className: CinemachineSameAsFollowTarget
+  - hash:
+      serializedVersion: 2
+      Hash: d9bd04a68219aa4325621dcf459a5952
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Shop
   - hash:
       serializedVersion: 2
       Hash: c8f1a224e0a43adc56c91864de822dd3
@@ -931,7 +943,7 @@ ScriptsOnlyBuild:
     className: cameraMove
   - hash:
       serializedVersion: 2
-      Hash: 01963f12eb85cf1adc9643871fbd867e
+      Hash: e054474b2f255c03c4f9d37c9c53885c
     assemblyName: Assembly-CSharp.dll
     namespaceName: StarterAssets
     className: ThirdPersonController
@@ -1093,16 +1105,16 @@ ScriptsOnlyBuild:
     className: TMP_Settings
   - hash:
       serializedVersion: 2
-      Hash: 35a1a8561174942c0a963145749bdece
+      Hash: fe1acaf115cfd74f923cab91081b7ea2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: HealthBar
+    className: PlayerManager
   - hash:
       serializedVersion: 2
       Hash: 131f425607820796717868b02ff18299
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: EnemyMovement
+    className: zombieMovement
   - hash:
       serializedVersion: 2
       Hash: dbfb4270852b0008a423a7418d9de4cf
@@ -1253,6 +1265,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GunAim
+  - hash:
+      serializedVersion: 2
+      Hash: 5caa54e5e0de1c834f81987688b5e1c8
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Mensaje
   platform: 13
   scenePathNames:
   - Assets/Scenes/Graveyard.unity
