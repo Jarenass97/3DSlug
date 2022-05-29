@@ -5,3 +5,14 @@
 .vs/slnx.sqlite-journal
 
 *.tmp
+3DSlug/.plastic/
+
+3DSlug/.vs/3DSlug/v17/
+
+3DSlug/Library/
+
+3DSlug/Logs/
+
+3DSlug/obj/Debug/
+
+3DSlug/Packages/

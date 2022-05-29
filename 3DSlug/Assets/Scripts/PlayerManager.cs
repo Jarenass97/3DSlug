@@ -22,6 +22,7 @@ public class PlayerManager : MonoBehaviour
     public TextMeshProUGUI contadorPuntos;
     private List<GameObject> armas;
     private ThirdPersonController tpc;
+    public GameObject puntoMira;
 
     private void Start()
     {
@@ -43,6 +44,7 @@ public class PlayerManager : MonoBehaviour
         addPuntos(-precio);
         armas.Add(arma);
         tpc.equiparArma(arma);
+        puntoMira.SetActive(true);
     }
 
     void Update()

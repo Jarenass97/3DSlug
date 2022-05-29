@@ -39,10 +39,12 @@ namespace StarterAssets
         public float JumpTimeout = 0.50f;
 
         public GameObject portaPistola;
+        private GameObject armaEquipada;
         internal void equiparArma(GameObject arma)
         {
             hacha.SetActive(false);
             Instantiate(arma, portaPistola.transform);
+            armaEquipada = portaPistola;
         }
 
         [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
@@ -124,6 +126,7 @@ namespace StarterAssets
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
             espadonAttack = GameObject.Find("hacha").GetComponent<EspadonAttack>();
+            armaEquipada = hacha;
             AssignAnimationIDs();
 
             // reset our timeouts on start
@@ -142,7 +145,16 @@ namespace StarterAssets
             delimitarArea();
             Attack();
             launch();
+            if (armaEquipada != hacha) mirarDondeCamara();
         }
+
+        private void mirarDondeCamara()
+        {
+            float x = 2 * transform.position.x - _mainCamera.transform.position.x;
+            float z = 2 * transform.position.z - _mainCamera.transform.position.z;
+            transform.LookAt(new Vector3(x, 0, z));
+        }
+
         private bool isLaunching = false;
         private int numGranadas = 0;
         public TextMeshProUGUI contadorGranadas;
@@ -187,11 +199,11 @@ namespace StarterAssets
         {
             _animator.avatar = attackAvatar;
             _animator.SetBool("isAttacking", true);
-            hacha.SetActive(false);
+            armaEquipada.SetActive(false);
             yield return new WaitForSeconds(0.4f);
             Instantiate(granada, mano.transform.position, transform.rotation);
             yield return new WaitForSeconds(0.6f);
-            hacha.SetActive(true);
+            armaEquipada.SetActive(true);
             _animator.SetBool("isAttacking", false);
             _animator.avatar = movementAvatar;
             isLaunching = false;
