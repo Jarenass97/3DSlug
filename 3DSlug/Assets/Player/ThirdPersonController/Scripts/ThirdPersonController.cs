@@ -39,12 +39,13 @@ namespace StarterAssets
         public float JumpTimeout = 0.50f;
 
         public GameObject portaPistola;
-        private GameObject armaEquipada;
+        private bool pistolaEquipada;
+        public GameObject laserMira;
         internal void equiparArma(GameObject arma)
         {
-            hacha.SetActive(false);
             Instantiate(arma, portaPistola.transform);
-            armaEquipada = portaPistola;
+            pistolaEquipada = true;
+            laserMira.SetActive(true);
         }
 
         [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
@@ -126,13 +127,26 @@ namespace StarterAssets
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
             espadonAttack = GameObject.Find("hacha").GetComponent<EspadonAttack>();
-            armaEquipada = hacha;
             AssignAnimationIDs();
 
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
-            msg.enabled = false;
+        }
+
+        public void disparar()
+        {
+            StartCoroutine(animacionDisparo());
+        }
+
+        IEnumerator animacionDisparo()
+        {
+            yield return new WaitForSeconds(2);
+            _animator.avatar = attackAvatar;
+            _animator.SetBool("isShotting", true);
+            yield return new WaitForSeconds(0.2f);
+            _animator.SetBool("isShotting", false);
+            _animator.avatar = movementAvatar;
         }
 
         private void Update()
@@ -145,7 +159,7 @@ namespace StarterAssets
             delimitarArea();
             Attack();
             launch();
-            if (armaEquipada != hacha) mirarDondeCamara();
+            if (pistolaEquipada) mirarDondeCamara();
         }
 
         private void mirarDondeCamara()
@@ -199,11 +213,11 @@ namespace StarterAssets
         {
             _animator.avatar = attackAvatar;
             _animator.SetBool("isAttacking", true);
-            armaEquipada.SetActive(false);
+            hacha.SetActive(false);
             yield return new WaitForSeconds(0.4f);
             Instantiate(granada, mano.transform.position, transform.rotation);
             yield return new WaitForSeconds(0.6f);
-            armaEquipada.SetActive(true);
+            hacha.SetActive(true);
             _animator.SetBool("isAttacking", false);
             _animator.avatar = movementAvatar;
             isLaunching = false;

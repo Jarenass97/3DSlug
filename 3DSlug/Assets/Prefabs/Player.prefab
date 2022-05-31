@@ -1078,6 +1078,37 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1618439205755873243
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1742534520828645891}
+  m_Layer: 0
+  m_Name: mano
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1742534520828645891
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618439205755873243}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6012447368823288163}
+  m_Father: {fileID: 4804737919177436505}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2102126740255093089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2755,6 +2786,36 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &4258925928304899801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6012447368823288163}
+  m_Layer: 0
+  m_Name: portaPistola
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6012447368823288163
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4258925928304899801}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1742534520828645891}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4312370548335000363
 GameObject:
   m_ObjectHideFlags: 0
@@ -3022,36 +3083,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!1 &4487693682712472531
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4746830484765587506}
-  m_Layer: 0
-  m_Name: portaPistola
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4746830484765587506
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4487693682712472531}
-  m_LocalRotation: {x: 0.79726726, y: -0.03411731, z: -0.03630249, w: 0.60156715}
-  m_LocalPosition: {x: 0, y: 0.104, z: 0.146}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4804737919177436525}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 73.086, y: -160.12, z: -160.299}
 --- !u!1 &4516008979263767047
 GameObject:
   m_ObjectHideFlags: 0
@@ -3655,7 +3686,7 @@ Animator:
     'HipPart1_L'\n\tTransform 'HipPart1_R'\n\tTransform 'Ankle_R'\n\tTransform 'Hip_L'\n\tTransform
     'RingFinger1_L'\n\tTransform 'Knee_L'\n\tTransform 'RingFinger2_R'\n\tTransform
     'IndexFinger2_R'\n\tand more ...\n\tFrom animation clip 'Attack'\n\tFrom animation
-    clip 'Damage'\n\tFrom animation clip 'Death'"
+    clip 'Damage'\n\tFrom animation clip 'Death'\n\tFrom animation clip 'shot'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -3883,6 +3914,7 @@ MonoBehaviour:
   attackAvatar: {fileID: 0}
   movementAvatar: {fileID: 0}
   contadorPuntos: {fileID: 0}
+  puntoMira: {fileID: 0}
 --- !u!1 &4804737918064349007
 GameObject:
   m_ObjectHideFlags: 0
@@ -6387,14 +6419,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4804737919177470247}
-  m_LocalRotation: {x: 0.5493875, y: -0.01584017, z: 0.8337281, w: 0.053103093}
-  m_LocalPosition: {x: -0.18011776, y: -0.097096264, z: 0.09935536}
+  m_LocalRotation: {x: 0.39219266, y: 0.49230564, z: 0.715831, w: -0.30233458}
+  m_LocalPosition: {x: -0.18011725, y: -0.097095005, z: 0.09935554}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4804737919177436419}
   m_Father: {fileID: 4804737919177436191}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -70.384, y: 51.794, z: 187.993}
 --- !u!1 &4804737919177470251
 GameObject:
   m_ObjectHideFlags: 0
@@ -6887,6 +6919,7 @@ Transform:
   - {fileID: 4804737919177436247}
   - {fileID: 4804737919177436575}
   - {fileID: 4804737919177436437}
+  - {fileID: 1742534520828645891}
   m_Father: {fileID: 4804737919177436207}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9536,7 +9569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4804737919177436525}
   m_Layer: 0
-  m_Name: locator1
+  m_Name: mano
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9554,7 +9587,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4804737919177436527}
-  - {fileID: 4746830484765587506}
   m_Father: {fileID: 4804737919177436519}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10225,12 +10257,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4804737919498499486}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.20000005, y: 0.44500005, z: -4}
+  m_LocalPosition: {x: 0.52, y: 0.625, z: -3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8758630230009125837}
   m_Father: {fileID: 4804737919878764532}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 86.198, y: -720, z: 0}
 --- !u!20 &4804737919498499482
 Camera:
   m_ObjectHideFlags: 0
@@ -11966,6 +11999,63 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &7570262502881389591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8758630230009125837}
+  - component: {fileID: 7834995017320073702}
+  - component: {fileID: 2518900126468232085}
+  m_Layer: 0
+  m_Name: laserMira
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8758630230009125837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7570262502881389591}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 255}
+  m_LocalScale: {x: 1, y: 1, z: 500}
+  m_Children: []
+  m_Father: {fileID: 4804737919498499481}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7834995017320073702
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7570262502881389591}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0, y: 0, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2518900126468232085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7570262502881389591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13f94804bcb55da40ab9db05bcdbd7fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7907633886080521004
 GameObject:
   m_ObjectHideFlags: 0
