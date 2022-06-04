@@ -11,6 +11,7 @@ TagManager:
   - enemy
   - healthy
   - hacha
+  - shop
   layers:
   - Default
   - TransparentFX
