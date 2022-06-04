@@ -14,11 +14,14 @@ public class LaserMira : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("enemy"))
+        if (!tpc.isShotting())
         {
-            EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
-            enemyHealth.recibeDamage(5);
-            tpc.disparar();
+            if (other.CompareTag("enemy"))
+            {
+                EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
+                enemyHealth.recibeDamage(5);
+                tpc.disparar();
+            }
         }
     }
 }

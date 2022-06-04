@@ -17,6 +17,7 @@ namespace StarterAssets
 #endif
     public class ThirdPersonController : MonoBehaviour
     {
+        #region configuraciones predeterminadas
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
@@ -37,16 +38,6 @@ namespace StarterAssets
         [Space(10)]
         [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
         public float JumpTimeout = 0.50f;
-
-        public GameObject portaPistola;
-        private bool pistolaEquipada;
-        public GameObject laserMira;
-        internal void equiparArma(GameObject arma)
-        {
-            Instantiate(arma, portaPistola.transform);
-            pistolaEquipada = true;
-            laserMira.SetActive(true);
-        }
 
         [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
         public float FallTimeout = 0.15f;
@@ -118,8 +109,29 @@ namespace StarterAssets
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
         }
+        #endregion
+
+        public GameObject portaPistola;
+        public GameObject laserMira;
+        public GameObject granada;
+        public GameObject hacha;
+        public GameObject mano;
+        private GameObject pistola;
 
         private EspadonAttack espadonAttack;
+
+        public TextMeshProUGUI contadorGranadas;
+        public TextMeshProUGUI msg;
+
+        public Avatar attackAvatar;
+        public Avatar movementAvatar;
+
+        private bool pistolaEquipada;
+        private bool shotting = false;
+        private bool isLaunching = false;
+        private bool isAttacking = false;
+        private int numGranadas = 0;
+
         private void Start()
         {
             Screen.orientation = ScreenOrientation.LandscapeLeft;
@@ -132,21 +144,6 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
-        }
-
-        public void disparar()
-        {
-            StartCoroutine(animacionDisparo());
-        }
-
-        IEnumerator animacionDisparo()
-        {
-            yield return new WaitForSeconds(2);
-            _animator.avatar = attackAvatar;
-            _animator.SetBool("isShotting", true);
-            yield return new WaitForSeconds(0.2f);
-            _animator.SetBool("isShotting", false);
-            _animator.avatar = movementAvatar;
         }
 
         private void Update()
@@ -162,6 +159,35 @@ namespace StarterAssets
             if (pistolaEquipada) mirarDondeCamara();
         }
 
+        internal void equiparArma(GameObject arma)
+        {
+            pistola = Instantiate(arma, portaPistola.transform);
+            pistolaEquipada = true;
+            laserMira.SetActive(true);
+        }
+
+        public bool isShotting()
+        {
+            return shotting;
+        }
+
+        public void disparar()
+        {
+            StartCoroutine(animacionDisparo());
+        }
+
+        IEnumerator animacionDisparo()
+        {
+            shotting = true;
+            _animator.avatar = attackAvatar;
+            _animator.SetBool("isShotting", true);
+            pistola.GetComponent<AudioSource>().Play();
+            yield return new WaitForSeconds(0.17f);
+            _animator.SetBool("isShotting", false);
+            _animator.avatar = movementAvatar;
+            shotting = false;
+        }
+
         private void mirarDondeCamara()
         {
             float x = 2 * transform.position.x - _mainCamera.transform.position.x;
@@ -169,9 +195,7 @@ namespace StarterAssets
             transform.LookAt(new Vector3(x, 0, z));
         }
 
-        private bool isLaunching = false;
-        private int numGranadas = 0;
-        public TextMeshProUGUI contadorGranadas;
+
         private void launch()
         {
             if (_input.launch && !isLaunching /*&& numGranadas>0*/)//TODO descomentar
@@ -188,13 +212,13 @@ namespace StarterAssets
             contadorGranadas.text = numGranadas.ToString();
             mostrarMensaje("¡Has conseguido 1 granada!");
         }
-        public TextMeshProUGUI msg;
+
         private void mostrarMensaje(string mensaje)
         {
             msg.GetComponent<Mensaje>().mostrar(mensaje);
         }
 
-        private bool isAttacking = false;
+
         private void Attack()
         {
             if (_input.attack && !isAttacking)
@@ -204,11 +228,7 @@ namespace StarterAssets
             }
         }
 
-        public Avatar attackAvatar;
-        public Avatar movementAvatar;
-        public GameObject granada;
-        public GameObject hacha;
-        public GameObject mano;
+
         IEnumerator LaunchAnim()
         {
             _animator.avatar = attackAvatar;
@@ -256,6 +276,7 @@ namespace StarterAssets
             }
         }
 
+        #region métodos predeterminados
         private void LateUpdate()
         {
             CameraRotation();
@@ -449,6 +470,7 @@ namespace StarterAssets
             Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 
         }
+        #endregion
     }
 
 }
