@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Graveyard.unity
     guid: b475c139dd123534a9c2b7cda5de4d6f
+  - enabled: 1
+    path: Assets/Scenes/Castle.unity
+    guid: 626b0d38b73dfa04b86b9f2a5290db3b
   m_configObjects: {}

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     private int numEnemies = 0;
     private int ronda = 1;
     private int rondaFinal = 100;
+    public int rondaCambioEscena = 2;
     public GameObject GamePanel;
     public GameObject GameOverPanel;
     public GameObject GameIntroPanel;
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
     public GameObject GameWinPanel;
     public GameObject menuPpal;
     public GameObject menuDiff;
+    public TextMeshProUGUI msg;
     public TextMeshProUGUI contadorEnemigos;
     public TextMeshProUGUI contadorRondas;
     public TextMeshProUGUI resultadoPartida;
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
     private ThirdPersonController tpc;
     private ArrayList healthyRespawnsUtilizados = new ArrayList();
     private bool isInGame = false;
+    private bool firstEscene = true;
     private int dificultad = 1;
     void Start()
     {
@@ -38,6 +41,7 @@ public class GameManager : MonoBehaviour
         tpc = GameObject.Find("PlayerArmature").GetComponent<ThirdPersonController>();
         txtButtonDificultad.text = "Dificultad: Fácil";
     }
+
     private void comprobarDatosGuardados()
     {
         if (File.Exists(Application.persistentDataPath + "/savedGames.gd"))
@@ -58,7 +62,8 @@ public class GameManager : MonoBehaviour
     private void nextLevel()
     {
         if (!isGameOver && isInGame)
-        {            
+        {
+            if (ronda == rondaCambioEscena) StartCoroutine(pasarEscena());
             if (ronda <= rondaFinal)
             {
                 numEnemies = Random.Range(dificultad * ronda, (2 * dificultad * ronda) + 1);
@@ -70,6 +75,22 @@ public class GameManager : MonoBehaviour
             else finGame();
         }
     }
+
+    IEnumerator pasarEscena()
+    {        
+        tpc.enabled = false;
+        tpc.mostrarMensaje("Ronda completada");
+        yield return new WaitForSeconds(2);
+        GameObject player = GameObject.Find("PlayerArmature");
+        GameObject respawnPlayer = GameObject.Find("respawnPlayer");
+        player.gameObject.transform.position = new Vector3(respawnPlayer.transform.position.x, player.transform.position.y, respawnPlayer.transform.position.z);
+        player.gameObject.transform.rotation = respawnPlayer.transform.rotation;
+        yield return new WaitForSeconds(0.1f);
+        tpc.enabled = true;
+        DontDestroyOnLoad(GameObject.Find("Player"));
+        DontDestroyOnLoad(this);
+        SceneManager.LoadScene("Castle");
+    }         
 
     private void finGame()
     {
@@ -206,7 +227,8 @@ public class GameManager : MonoBehaviour
         menuPpal.SetActive(true);
     }
 
-    public void pauseGame() {
+    public void pauseGame()
+    {
         GamePanel.SetActive(false);
         GamePausePanel.SetActive(true);
         Time.timeScale = 0;

@@ -5,3 +5,7 @@
 .vs/slnx.sqlite-journal
 
 *.tmp
+
+3DSlug/*/
+
+!3DSlug/Assets/

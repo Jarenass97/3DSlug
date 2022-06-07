@@ -46,8 +46,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -60,6 +62,39 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
   sceneClasses:
+    Assets/Scenes/Castle.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 23
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 33
+      Script: {instanceID: 0}
+    - Class: 43
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 64
+      Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 258
+      Script: {instanceID: 0}
+    - Class: 850595691
+      Script: {instanceID: 0}
     Assets/Scenes/Graveyard.unity:
     - Class: 1
       Script: {instanceID: 0}
@@ -114,79 +149,79 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1502}
     - Class: 114
-      Script: {instanceID: 1568}
+      Script: {instanceID: 1558}
     - Class: 114
-      Script: {instanceID: 1884}
+      Script: {instanceID: 1874}
     - Class: 114
-      Script: {instanceID: 1966}
+      Script: {instanceID: 1956}
     - Class: 114
-      Script: {instanceID: 2120}
+      Script: {instanceID: 2110}
     - Class: 114
-      Script: {instanceID: 2144}
+      Script: {instanceID: 2134}
     - Class: 114
-      Script: {instanceID: 2244}
+      Script: {instanceID: 2234}
     - Class: 114
-      Script: {instanceID: 2314}
+      Script: {instanceID: 2304}
     - Class: 114
-      Script: {instanceID: 2486}
+      Script: {instanceID: 2476}
     - Class: 114
-      Script: {instanceID: 2598}
+      Script: {instanceID: 2588}
     - Class: 114
-      Script: {instanceID: 2638}
+      Script: {instanceID: 2628}
     - Class: 114
-      Script: {instanceID: 2688}
+      Script: {instanceID: 2678}
     - Class: 114
-      Script: {instanceID: 2734}
+      Script: {instanceID: 2724}
     - Class: 114
-      Script: {instanceID: 2808}
+      Script: {instanceID: 2798}
     - Class: 114
-      Script: {instanceID: 2816}
+      Script: {instanceID: 2806}
     - Class: 114
-      Script: {instanceID: 2846}
+      Script: {instanceID: 2836}
     - Class: 114
-      Script: {instanceID: 2868}
+      Script: {instanceID: 2858}
     - Class: 114
-      Script: {instanceID: 2876}
+      Script: {instanceID: 2866}
     - Class: 114
-      Script: {instanceID: 2896}
+      Script: {instanceID: 2886}
     - Class: 114
-      Script: {instanceID: 3178}
+      Script: {instanceID: 3168}
     - Class: 114
-      Script: {instanceID: 3374}
+      Script: {instanceID: 3364}
     - Class: 114
-      Script: {instanceID: 3392}
+      Script: {instanceID: 3382}
     - Class: 114
-      Script: {instanceID: 3566}
+      Script: {instanceID: 3556}
     - Class: 114
-      Script: {instanceID: 3612}
+      Script: {instanceID: 3602}
     - Class: 114
-      Script: {instanceID: 3676}
+      Script: {instanceID: 3666}
     - Class: 114
-      Script: {instanceID: 3690}
+      Script: {instanceID: 3680}
     - Class: 114
-      Script: {instanceID: 3816}
+      Script: {instanceID: 3806}
     - Class: 114
-      Script: {instanceID: 3886}
+      Script: {instanceID: 3876}
     - Class: 114
-      Script: {instanceID: 4114}
+      Script: {instanceID: 4104}
     - Class: 114
-      Script: {instanceID: 4140}
+      Script: {instanceID: 4130}
     - Class: 114
-      Script: {instanceID: 4146}
+      Script: {instanceID: 4136}
     - Class: 114
-      Script: {instanceID: 4506}
+      Script: {instanceID: 4496}
     - Class: 114
-      Script: {instanceID: 4548}
+      Script: {instanceID: 4538}
     - Class: 114
-      Script: {instanceID: 4672}
+      Script: {instanceID: 4662}
     - Class: 114
-      Script: {instanceID: 4724}
+      Script: {instanceID: 4714}
     - Class: 114
-      Script: {instanceID: 4726}
+      Script: {instanceID: 4716}
     - Class: 114
-      Script: {instanceID: 5016}
+      Script: {instanceID: 5006}
     - Class: 114
-      Script: {instanceID: 5236}
+      Script: {instanceID: 5226}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -722,7 +757,7 @@ ScriptsOnlyBuild:
     className: Button
   - hash:
       serializedVersion: 2
-      Hash: 769a8d52f2b9bd2df9ca1794459cb77a
+      Hash: 49c465709d333a16004bceef44c4dadb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -1281,4 +1316,5 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/Graveyard.unity
+  - Assets/Scenes/Castle.unity
   playerPath: C:/Users/jorge/Desktop/proyecto DAM/3DSlug.apk

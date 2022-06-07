@@ -61,6 +61,7 @@ namespace StarterAssets
         public float BottomClamp = -30.0f;
         [Tooltip("Additional degress to override the camera. Useful for fine tuning camera position when locked")]
         public float CameraAngleOverride = 0.0f;
+
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
@@ -153,7 +154,7 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
-            delimitarArea();
+            //delimitarArea();
             Attack();
             launch();
             if (pistolaEquipada) mirarDondeCamara();
@@ -213,7 +214,7 @@ namespace StarterAssets
             mostrarMensaje("¡Has conseguido 1 granada!");
         }
 
-        private void mostrarMensaje(string mensaje)
+        public void mostrarMensaje(string mensaje)
         {
             msg.GetComponent<Mensaje>().mostrar(mensaje);
         }
@@ -274,6 +275,12 @@ namespace StarterAssets
             {
                 transform.position = new Vector3(transform.position.x, transform.position.y, zRangeMax);
             }
+        }
+
+        public void colocarJugador(GameObject gameObject)
+        {
+            transform.position = new Vector3(gameObject.transform.position.x, transform.position.y, gameObject.transform.position.z);
+            transform.rotation = gameObject.transform.rotation;
         }
 
         #region métodos predeterminados
