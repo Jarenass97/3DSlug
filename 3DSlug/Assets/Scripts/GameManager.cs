@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     private int numEnemies = 0;
     private int ronda = 1;
     private int rondaFinal = 100;
-    public int rondaCambioEscena = 2;
+    public int rondaCambioEscena = 3;
     public GameObject GamePanel;
     public GameObject GameOverPanel;
     public GameObject GameIntroPanel;
@@ -40,6 +40,14 @@ public class GameManager : MonoBehaviour
         comprobarDatosGuardados();
         tpc = GameObject.Find("PlayerArmature").GetComponent<ThirdPersonController>();
         txtButtonDificultad.text = "Dificultad: Fácil";
+        //comenzarPartida();
+        //StartCoroutine(prueba());
+    }
+
+    IEnumerator prueba()
+    {
+        yield return new WaitForSeconds(5);
+        StartCoroutine(pasarEscena());
     }
 
     private void comprobarDatosGuardados()
