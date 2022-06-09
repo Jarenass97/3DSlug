@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 using TMPro;
@@ -16,6 +17,7 @@ namespace StarterAssets
 #endif
     public class ThirdPersonController : MonoBehaviour
     {
+        #region configuraciones predeterminadas
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
@@ -36,6 +38,7 @@ namespace StarterAssets
         [Space(10)]
         [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
         public float JumpTimeout = 0.50f;
+
         [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
         public float FallTimeout = 0.15f;
 
@@ -106,8 +109,29 @@ namespace StarterAssets
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
         }
+        #endregion
+
+        public GameObject portaPistola;
+        public GameObject laserMira;
+        public GameObject granada;
+        public GameObject hacha;
+        public GameObject mano;
+        private GameObject pistola;
 
         private EspadonAttack espadonAttack;
+
+        public TextMeshProUGUI contadorGranadas;
+        public TextMeshProUGUI msg;
+
+        public Avatar attackAvatar;
+        public Avatar movementAvatar;
+
+        private bool pistolaEquipada;
+        private bool shotting = false;
+        private bool isLaunching = false;
+        private bool isAttacking = false;
+        private int numGranadas = 0;
+
         private void Start()
         {
             Screen.orientation = ScreenOrientation.LandscapeLeft;
@@ -115,12 +139,11 @@ namespace StarterAssets
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
             espadonAttack = GameObject.Find("hacha").GetComponent<EspadonAttack>();
-            AssignAnimationIDs();            
+            AssignAnimationIDs();
 
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
-            avisoConseguirGranada.enabled = false;
         }
 
         private void Update()
@@ -133,10 +156,46 @@ namespace StarterAssets
             delimitarArea();
             Attack();
             launch();
+            if (pistolaEquipada) mirarDondeCamara();
         }
-        private bool isLaunching = false;
-        private int numGranadas = 0;
-        public TextMeshProUGUI contadorGranadas;
+
+        internal void equiparArma(GameObject arma)
+        {
+            pistola = Instantiate(arma, portaPistola.transform);
+            pistolaEquipada = true;
+            laserMira.SetActive(true);
+        }
+
+        public bool isShotting()
+        {
+            return shotting;
+        }
+
+        public void disparar()
+        {
+            StartCoroutine(animacionDisparo());
+        }
+
+        IEnumerator animacionDisparo()
+        {
+            shotting = true;
+            _animator.avatar = attackAvatar;
+            _animator.SetBool("isShotting", true);
+            pistola.GetComponent<AudioSource>().Play();
+            yield return new WaitForSeconds(0.17f);
+            _animator.SetBool("isShotting", false);
+            _animator.avatar = movementAvatar;
+            shotting = false;
+        }
+
+        private void mirarDondeCamara()
+        {
+            float x = 2 * transform.position.x - _mainCamera.transform.position.x;
+            float z = 2 * transform.position.z - _mainCamera.transform.position.z;
+            transform.LookAt(new Vector3(x, 0, z));
+        }
+
+
         private void launch()
         {
             if (_input.launch && !isLaunching /*&& numGranadas>0*/)//TODO descomentar
@@ -147,25 +206,19 @@ namespace StarterAssets
                 StartCoroutine(LaunchAnim());
             }
         }
-        public TextMeshProUGUI avisoConseguirGranada;
-        private Animator animText;
         public void addGranadas()
         {
             numGranadas++;
             contadorGranadas.text = numGranadas.ToString();
-            animText = avisoConseguirGranada.GetComponent<Animator>();
-            StartCoroutine(animacionTexto());
-        }
-        IEnumerator animacionTexto()
-        {
-            avisoConseguirGranada.enabled = true;
-            animText.SetBool("mostrar", true);
-            yield return new WaitForSeconds(2);
-            animText.SetBool("mostrar", false);
-            avisoConseguirGranada.enabled = false;
+            mostrarMensaje("¡Has conseguido 1 granada!");
         }
 
-        private bool isAttacking = false;
+        private void mostrarMensaje(string mensaje)
+        {
+            msg.GetComponent<Mensaje>().mostrar(mensaje);
+        }
+
+
         private void Attack()
         {
             if (_input.attack && !isAttacking)
@@ -175,26 +228,22 @@ namespace StarterAssets
             }
         }
 
-        public Avatar attackAvatar;
-        public Avatar movementAvatar;
-        public GameObject granada;
-        public GameObject hacha;
-        public GameObject mano;
+
         IEnumerator LaunchAnim()
-        {           
+        {
             _animator.avatar = attackAvatar;
-            _animator.SetBool("isAttacking", true);            
+            _animator.SetBool("isAttacking", true);
             hacha.SetActive(false);
-            yield return new WaitForSeconds(0.4f);            
+            yield return new WaitForSeconds(0.4f);
             Instantiate(granada, mano.transform.position, transform.rotation);
             yield return new WaitForSeconds(0.6f);
-            hacha.SetActive(true);            
+            hacha.SetActive(true);
             _animator.SetBool("isAttacking", false);
             _animator.avatar = movementAvatar;
             isLaunching = false;
         }
         IEnumerator AttackAnim()
-        {            
+        {
             _animator.avatar = attackAvatar;
             _animator.SetBool("isAttacking", true);
             espadonAttack.growl();
@@ -227,6 +276,7 @@ namespace StarterAssets
             }
         }
 
+        #region métodos predeterminados
         private void LateUpdate()
         {
             CameraRotation();
@@ -420,6 +470,7 @@ namespace StarterAssets
             Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 
         }
+        #endregion
     }
 
 }

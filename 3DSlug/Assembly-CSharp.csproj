@@ -62,6 +62,9 @@
     <Compile Include="Assets\EffectExamples\Shared\Scripts\ParticleMenu.cs" />
     <Compile Include="Assets\Player\Mobile\Scripts\VirtualInputs\UIVirtualButton.cs" />
     <Compile Include="Assets\Player\InputSystem\StarterAssetsInputs.cs" />
+    <Compile Include="Assets\Scripts\LaserMira.cs" />
+    <Compile Include="Assets\Scripts\Mensaje.cs" />
+    <Compile Include="Assets\Scripts\Shop.cs" />
     <Compile Include="Assets\EffectExamples\Shared\Scripts\DecalDestroyer.cs" />
     <Compile Include="Assets\Player\ThirdPersonController\Scripts\BasicRigidBodyPush.cs" />
     <Compile Include="Assets\Scripts\HealthyProperties.cs" />
@@ -79,8 +82,8 @@
     <Compile Include="Assets\Cementerio\Demo\cameraMove.cs" />
     <Compile Include="Assets\Player\ThirdPersonController\Scripts\ThirdPersonController.cs" />
     <Compile Include="Assets\Scripts\EnemyHealth.cs" />
-    <Compile Include="Assets\Scripts\HealthBar.cs" />
-    <Compile Include="Assets\Scripts\EnemyMovement.cs" />
+    <Compile Include="Assets\Scripts\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\zombieMovement.cs" />
     <Compile Include="Assets\EffectExamples\Shared\Scripts\GunAim.cs" />
   </ItemGroup>
   <ItemGroup>
