@@ -36673,7 +36673,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451643120}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.87, y: 1.041, z: 56.41}
+  m_LocalPosition: {x: 1.87, y: 1.041, z: 60.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -39092,7 +39092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8299a208eaa26d418493b95e8d2c9f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyRespawnPoints:
+  enemyRespawnPointsGraveyard:
   - {fileID: 1919462242}
   - {fileID: 782749340}
   - {fileID: 1379393337}
@@ -39102,7 +39102,7 @@ MonoBehaviour:
   - {fileID: 1743063659}
   enemies:
   - {fileID: 7895252313243187559, guid: 33babe2368d302847af20442c9cd4675, type: 3}
-  healthyRespawnPoints:
+  healthyRespawnPointsGraveyard:
   - {fileID: 2116774479}
   - {fileID: 489465380}
   - {fileID: 1448927044}

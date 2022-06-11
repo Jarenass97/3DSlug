@@ -196,6 +196,17 @@ namespace StarterAssets
             transform.LookAt(new Vector3(x, 0, z));
         }
 
+        //TODO borrar
+        public void lanzagranada()
+        {
+            if (!isLaunching)
+            {
+                numGranadas--;
+                contadorGranadas.text = numGranadas.ToString();
+                isLaunching = true;
+                StartCoroutine(LaunchAnim());
+            }
+        }
 
         private void launch()
         {

@@ -46,8 +46,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -141,79 +143,79 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1502}
     - Class: 114
-      Script: {instanceID: 1664}
+      Script: {instanceID: 1558}
     - Class: 114
-      Script: {instanceID: 1980}
+      Script: {instanceID: 1874}
     - Class: 114
-      Script: {instanceID: 2062}
+      Script: {instanceID: 1956}
     - Class: 114
-      Script: {instanceID: 2216}
+      Script: {instanceID: 2110}
     - Class: 114
-      Script: {instanceID: 2240}
+      Script: {instanceID: 2134}
     - Class: 114
-      Script: {instanceID: 2340}
+      Script: {instanceID: 2234}
     - Class: 114
-      Script: {instanceID: 2410}
+      Script: {instanceID: 2304}
     - Class: 114
-      Script: {instanceID: 2582}
+      Script: {instanceID: 2476}
     - Class: 114
-      Script: {instanceID: 2694}
+      Script: {instanceID: 2588}
     - Class: 114
-      Script: {instanceID: 2734}
+      Script: {instanceID: 2628}
     - Class: 114
-      Script: {instanceID: 2784}
+      Script: {instanceID: 2678}
     - Class: 114
-      Script: {instanceID: 2830}
+      Script: {instanceID: 2724}
     - Class: 114
-      Script: {instanceID: 2904}
+      Script: {instanceID: 2798}
     - Class: 114
-      Script: {instanceID: 2912}
+      Script: {instanceID: 2806}
     - Class: 114
-      Script: {instanceID: 2942}
+      Script: {instanceID: 2836}
     - Class: 114
-      Script: {instanceID: 2964}
+      Script: {instanceID: 2858}
     - Class: 114
-      Script: {instanceID: 2972}
+      Script: {instanceID: 2866}
     - Class: 114
-      Script: {instanceID: 2992}
+      Script: {instanceID: 2886}
     - Class: 114
-      Script: {instanceID: 3274}
+      Script: {instanceID: 3168}
     - Class: 114
-      Script: {instanceID: 3470}
+      Script: {instanceID: 3364}
     - Class: 114
-      Script: {instanceID: 3488}
+      Script: {instanceID: 3382}
     - Class: 114
-      Script: {instanceID: 3662}
+      Script: {instanceID: 3556}
     - Class: 114
-      Script: {instanceID: 3708}
+      Script: {instanceID: 3602}
     - Class: 114
-      Script: {instanceID: 3772}
+      Script: {instanceID: 3666}
     - Class: 114
-      Script: {instanceID: 3786}
+      Script: {instanceID: 3680}
     - Class: 114
-      Script: {instanceID: 3912}
+      Script: {instanceID: 3806}
     - Class: 114
-      Script: {instanceID: 3982}
+      Script: {instanceID: 3876}
     - Class: 114
-      Script: {instanceID: 4210}
+      Script: {instanceID: 4104}
     - Class: 114
-      Script: {instanceID: 4236}
+      Script: {instanceID: 4130}
     - Class: 114
-      Script: {instanceID: 4242}
+      Script: {instanceID: 4136}
     - Class: 114
-      Script: {instanceID: 4602}
+      Script: {instanceID: 4496}
     - Class: 114
-      Script: {instanceID: 4644}
+      Script: {instanceID: 4538}
     - Class: 114
-      Script: {instanceID: 4768}
+      Script: {instanceID: 4662}
     - Class: 114
-      Script: {instanceID: 4820}
+      Script: {instanceID: 4714}
     - Class: 114
-      Script: {instanceID: 4822}
+      Script: {instanceID: 4716}
     - Class: 114
-      Script: {instanceID: 5112}
+      Script: {instanceID: 5006}
     - Class: 114
-      Script: {instanceID: 5332}
+      Script: {instanceID: 5226}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -749,7 +751,7 @@ ScriptsOnlyBuild:
     className: Button
   - hash:
       serializedVersion: 2
-      Hash: 49c465709d333a16004bceef44c4dadb
+      Hash: 9a74af9d4c31c001b620c6f3a5599d00
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager

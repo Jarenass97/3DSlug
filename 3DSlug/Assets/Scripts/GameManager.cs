@@ -9,12 +9,15 @@ using StarterAssets;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject[] enemyRespawnPoints;
+    public GameObject[] enemyRespawnPointsGraveyard;
+    private GameObject[] enemyRespawnPointsCastle;
     public GameObject[] enemies;
-    public GameObject[] healthyRespawnPoints;
+    private GameObject[] healthyRespawnPoints;
+    public GameObject[] healthyRespawnPointsGraveyard;
+    private GameObject[] healthyRespawnPointsCastle;
     public GameObject healthyObject;
     private int numEnemies = 0;
-    private int ronda = 1;
+    private int ronda = 0;
     private int rondaFinal = 100;
     public int rondaCambioEscena = 3;
     public GameObject GamePanel;
@@ -33,7 +36,7 @@ public class GameManager : MonoBehaviour
     private ThirdPersonController tpc;
     private ArrayList healthyRespawnsUtilizados = new ArrayList();
     private bool isInGame = false;
-    private bool firstEscene = true;
+    private bool firstScene = true;
     private int dificultad = 1;
     void Start()
     {
@@ -64,28 +67,33 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
+        //tpc.lanzagranada();
     }
 
     private void nextLevel()
     {
         if (!isGameOver && isInGame)
         {
-            if (ronda == rondaCambioEscena) StartCoroutine(pasarEscena());
-            if (ronda <= rondaFinal)
+            if (firstScene && ronda == rondaCambioEscena) StartCoroutine(pasarEscena());
+            else
             {
-                numEnemies = Random.Range(dificultad * ronda, (2 * dificultad * ronda) + 1);
-                contadorEnemigos.text = "Enemigos: " + numEnemies;
-                contadorRondas.text = "Ronda: " + ronda;
-                respawnEnemies();
-                ronda++;
+                if (ronda <= rondaFinal)
+                {
+                    ronda++;
+                    numEnemies = Random.Range(dificultad * ronda, (2 * dificultad * ronda) + 1);
+                    contadorEnemigos.text = "Enemigos: " + numEnemies;
+                    contadorRondas.text = "Ronda: " + ronda;
+                    if (firstScene) respawnEnemies(enemyRespawnPointsGraveyard);
+                    else respawnEnemies(enemyRespawnPointsCastle);
+                }
+                else finGame();
             }
-            else finGame();
         }
     }
 
     IEnumerator pasarEscena()
-    {        
+    {
+        firstScene = false;
         tpc.enabled = false;
         tpc.mostrarMensaje("Ronda completada");
         yield return new WaitForSeconds(2);
@@ -93,12 +101,33 @@ public class GameManager : MonoBehaviour
         GameObject respawnPlayer = GameObject.Find("respawnPlayer");
         player.gameObject.transform.position = new Vector3(respawnPlayer.transform.position.x, player.transform.position.y, respawnPlayer.transform.position.z);
         player.gameObject.transform.rotation = respawnPlayer.transform.rotation;
+        GameObject.Find("MainCamera").gameObject.transform.position = player.transform.position;
+        GameObject.Find("MainCamera").gameObject.transform.rotation = player.transform.rotation;
         yield return new WaitForSeconds(0.1f);
         tpc.enabled = true;
         DontDestroyOnLoad(GameObject.Find("Player"));
         DontDestroyOnLoad(this);
         SceneManager.LoadScene("Castle");
-    }         
+        yield return new WaitForSeconds(0.1f);
+        cargarNewRespawns();
+        nextLevel();
+    }
+
+    private void cargarNewRespawns()
+    {
+        enemyRespawnPointsCastle = new GameObject[7];
+        for (int i = 0; i < enemyRespawnPointsCastle.Length; i++)
+        {
+            enemyRespawnPointsCastle[i] = GameObject.Find("RespawnCastle (" + (i + 1) + ")");
+        }
+        healthyRespawnPointsCastle = new GameObject[8];
+        for (int i = 0; i < healthyRespawnPointsCastle.Length; i++)
+        {
+            healthyRespawnPointsCastle[i] = GameObject.Find("HealthyRespawnCastle (" + (i + 1) + ")");
+        }
+        healthyRespawnPoints = healthyRespawnPointsCastle;
+        healthyRespawnsUtilizados.Clear();
+    }
 
     private void finGame()
     {
@@ -119,13 +148,13 @@ public class GameManager : MonoBehaviour
         return isInGame;
     }
 
-    private void respawnEnemies()
+    private void respawnEnemies(GameObject[] respawnPoints)
     {
-        ArrayList respawns = new ArrayList(enemyRespawnPoints);
+        ArrayList respawns = new ArrayList(respawnPoints);
         GameObject respawnPoint;
         for (int i = 0; i < numEnemies; i++)
         {
-            if (respawns.Count == 0) respawns = new ArrayList(enemyRespawnPoints);
+            if (respawns.Count == 0) respawns = new ArrayList(respawnPoints);
             int enemyIndex = Random.Range(0, enemies.Length);
             respawnPoint = (GameObject)respawns[Random.Range(0, respawns.Count)];
             respawns.Remove(respawnPoint);
@@ -202,6 +231,7 @@ public class GameManager : MonoBehaviour
         GamePanel.SetActive(true);
         isInGame = true;
         nextLevel();
+        healthyRespawnPoints = healthyRespawnPointsGraveyard;
         StartCoroutine(generateHealthy());
     }
 
