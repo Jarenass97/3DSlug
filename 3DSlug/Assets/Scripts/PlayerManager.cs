@@ -18,7 +18,7 @@ public class PlayerManager : MonoBehaviour
     public Avatar attackAvatar;
     public Avatar movementAvatar;
     private AudioSource audio;
-    private int puntos = 0;
+    public int puntos = 0;
     public TextMeshProUGUI contadorPuntos;
     private List<GameObject> armas;
     private ThirdPersonController tpc;
@@ -86,7 +86,7 @@ public class PlayerManager : MonoBehaviour
             anim.avatar = movementAvatar;
         }
     }
-    private void addVida(int vida)
+    public void addVida(int vida)
     {
         vidaActual += vida;
     }
@@ -100,13 +100,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (!dead)
         {
-            if (other.gameObject.CompareTag("healthy"))
-            {
-                int vida = other.gameObject.GetComponent<HealthyProperties>().getHealthPoints();
-                addVida(vida);
-                gameManager.cogerHealthy(other.gameObject);
-                Destroy(other.gameObject);
-            }else if (other.gameObject.CompareTag("shop"))
+            if (other.gameObject.CompareTag("shop"))
             {
                 shopActive = other.gameObject.GetComponent<Shop>();
             }

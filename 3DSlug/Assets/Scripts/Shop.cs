@@ -8,7 +8,7 @@ public class Shop : MonoBehaviour
     public GameObject panelTienda;
     public GameObject arma;
     private PlayerManager playerManager;
-    private int precio = 5; // TODO cambiar
+    private int precio = 1; // TODO cambiar
     private bool armaComprada = false;
     public TextMeshProUGUI txtMensaje;
 

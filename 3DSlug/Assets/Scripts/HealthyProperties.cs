@@ -16,4 +16,15 @@ public class HealthyProperties : MonoBehaviour
     {
         return healthPoints;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            int vida = healthPoints;
+            other.GetComponent<PlayerManager>().addVida(vida);
+            GameObject.Find("GameManager").GetComponent<GameManager>().cogerHealthy(other.gameObject);
+            Destroy(this.gameObject);
+        }
+    }
 }

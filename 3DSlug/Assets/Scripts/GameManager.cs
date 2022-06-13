@@ -9,13 +9,17 @@ using StarterAssets;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject[] enemyRespawnPoints;
+    public GameObject[] enemyRespawnPointsGraveyard;
+    private GameObject[] enemyRespawnPointsCastle;
     public GameObject[] enemies;
-    public GameObject[] healthyRespawnPoints;
+    private GameObject[] healthyRespawnPoints;
+    public GameObject[] healthyRespawnPointsGraveyard;
+    private GameObject[] healthyRespawnPointsCastle;
     public GameObject healthyObject;
     private int numEnemies = 0;
-    private int ronda = 1;
+    private int ronda = 0;
     private int rondaFinal = 100;
+    public int rondaCambioEscena = 3;
     public GameObject GamePanel;
     public GameObject GameOverPanel;
     public GameObject GameIntroPanel;
@@ -23,52 +27,152 @@ public class GameManager : MonoBehaviour
     public GameObject GameWinPanel;
     public GameObject menuPpal;
     public GameObject menuDiff;
+    public GameObject loadScenePanel;
+    public TextMeshProUGUI msg;
+    public TextMeshProUGUI btnComenzar;
     public TextMeshProUGUI contadorEnemigos;
     public TextMeshProUGUI contadorRondas;
     public TextMeshProUGUI resultadoPartida;
     public TextMeshProUGUI txtButtonDificultad;
+    public TextMeshProUGUI txtNumMundo;
     private bool isGameOver = false;
     private ThirdPersonController tpc;
     private ArrayList healthyRespawnsUtilizados = new ArrayList();
     private bool isInGame = false;
+    private bool firstScene = true;
+    private int scene = 0;
     private int dificultad = 1;
+    private PlayerManager pm;
     void Start()
     {
-        comprobarDatosGuardados();
+        Partida.current = new Partida();
         tpc = GameObject.Find("PlayerArmature").GetComponent<ThirdPersonController>();
+        pm = GameObject.Find("PlayerArmature").GetComponent<PlayerManager>();
         txtButtonDificultad.text = "Dificultad: Fácil";
+        //comenzarPartida();
+        //StartCoroutine(prueba());
+        comprobarDatosGuardados();
     }
+
+    IEnumerator prueba()
+    {
+        yield return new WaitForSeconds(5);
+        StartCoroutine(pasarEscena(scene + 1));
+    }
+
     private void comprobarDatosGuardados()
     {
-        if (File.Exists(Application.persistentDataPath + "/savedGames.gd"))
+        SaveLoad.Load();
+        if (!Partida.isOnFirstScene())
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/savedGames.gd", FileMode.Open);
-            Scene scene = (Scene)bf.Deserialize(file);
-            file.Close();
-            SceneManager.SetActiveScene(scene);
+            btnComenzar.text = "Continuar";
+            scene = Partida.getScene();
+            pm.addPuntos(Partida.getPuntos());
+            ronda = Partida.getRonda() - 1;
+            tpc.cargarGranadas(Partida.getGranadas());
+            dificultad = Partida.getDificultad();
+            switch (dificultad)
+            {
+                case 1:
+                    txtButtonDificultad.text = "Dificultad: Fácil";
+                    break;
+                case 2:
+                    txtButtonDificultad.text = "Dificultad: Medio";
+                    break;
+                case 3:
+                    txtButtonDificultad.text = "Dificultad: Difícil";
+                    break;
+            }
+
         }
+    }
+
+    private void guardarPartida()
+    {
+        Partida.setScene(scene);
+        Partida.setPuntos(pm.puntos);
+        Partida.setRonda(ronda);
+        Partida.setDificultad(dificultad);
+        Partida.setGranadas(tpc.numGranadas);
+        SaveLoad.save();
     }
 
     void Update()
     {
-
+        //tpc.lanzagranada();
     }
 
-    private void nextLevel()
+    private void nextLevel(bool carga = false)
     {
         if (!isGameOver && isInGame)
-        {            
-            if (ronda <= rondaFinal)
+        {
+            if (firstScene && ronda == rondaCambioEscena) StartCoroutine(pasarEscena(scene + 1));
+            else
             {
-                numEnemies = Random.Range(dificultad * ronda, (2 * dificultad * ronda) + 1);
-                contadorEnemigos.text = "Enemigos: " + numEnemies;
-                contadorRondas.text = "Ronda: " + ronda;
-                respawnEnemies();
-                ronda++;
+                if (ronda <= rondaFinal)
+                {
+                    if (!carga) ronda++;
+                    numEnemies = Random.Range(dificultad * ronda, (2 * dificultad * ronda) + 1);
+                    contadorEnemigos.text = "Enemigos: " + numEnemies;
+                    contadorRondas.text = "Ronda: " + ronda;
+                    if (firstScene) respawnEnemies(enemyRespawnPointsGraveyard);
+                    else respawnEnemies(enemyRespawnPointsCastle);
+                }
+                else finGame();
             }
-            else finGame();
         }
+    }
+
+    IEnumerator pasarEscena(int indexScene, bool carga = false)
+    {
+        StartCoroutine(panelCarga(indexScene+1));
+        firstScene = false;
+        tpc.enabled = false;
+        tpc.mostrarMensaje("Ronda completada");
+        yield return new WaitForSeconds(2);
+        GameObject player = GameObject.Find("PlayerArmature");
+        GameObject respawnPlayer = GameObject.Find("respawnPlayer");
+        player.gameObject.transform.position = new Vector3(respawnPlayer.transform.position.x, player.transform.position.y, respawnPlayer.transform.position.z);
+        player.gameObject.transform.rotation = respawnPlayer.transform.rotation;
+        GameObject.Find("MainCamera").gameObject.transform.position = player.transform.position;
+        GameObject.Find("MainCamera").gameObject.transform.rotation = player.transform.rotation;
+        yield return new WaitForSeconds(0.1f);
+        tpc.enabled = true;
+        DontDestroyOnLoad(GameObject.Find("Player"));
+        DontDestroyOnLoad(this);
+        SceneManager.LoadScene(indexScene);
+        yield return new WaitForSeconds(0.1f);
+        cargarNewRespawns();
+        nextLevel(carga);
+        if (!carga)
+        {
+            scene++;
+            guardarPartida();
+        }
+    }
+
+    IEnumerator panelCarga(int numScene)
+    {
+        txtNumMundo.text = "Mundo " + numScene;
+        loadScenePanel.SetActive(true);
+        yield return new WaitForSeconds(3);
+        loadScenePanel.SetActive(false);
+    }
+
+    private void cargarNewRespawns()
+    {
+        enemyRespawnPointsCastle = new GameObject[7];
+        for (int i = 0; i < enemyRespawnPointsCastle.Length; i++)
+        {
+            enemyRespawnPointsCastle[i] = GameObject.Find("RespawnCastle (" + (i + 1) + ")");
+        }
+        healthyRespawnPointsCastle = new GameObject[8];
+        for (int i = 0; i < healthyRespawnPointsCastle.Length; i++)
+        {
+            healthyRespawnPointsCastle[i] = GameObject.Find("HealthyRespawnCastle (" + (i + 1) + ")");
+        }
+        healthyRespawnPoints = healthyRespawnPointsCastle;
+        healthyRespawnsUtilizados.Clear();
     }
 
     private void finGame()
@@ -90,13 +194,13 @@ public class GameManager : MonoBehaviour
         return isInGame;
     }
 
-    private void respawnEnemies()
+    private void respawnEnemies(GameObject[] respawnPoints)
     {
-        ArrayList respawns = new ArrayList(enemyRespawnPoints);
+        ArrayList respawns = new ArrayList(respawnPoints);
         GameObject respawnPoint;
         for (int i = 0; i < numEnemies; i++)
         {
-            if (respawns.Count == 0) respawns = new ArrayList(enemyRespawnPoints);
+            if (respawns.Count == 0) respawns = new ArrayList(respawnPoints);
             int enemyIndex = Random.Range(0, enemies.Length);
             respawnPoint = (GameObject)respawns[Random.Range(0, respawns.Count)];
             respawns.Remove(respawnPoint);
@@ -164,7 +268,11 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (pm.isDead()) { SaveLoad.borrarDatos(); }
+        Time.timeScale = 1;
+        SceneManager.MoveGameObjectToScene(GameObject.Find("Player"), SceneManager.GetActiveScene());
+        SceneManager.MoveGameObjectToScene(GameObject.Find("GameManager"), SceneManager.GetActiveScene());
+        SceneManager.LoadScene(0);
     }
 
     public void comenzarPartida()
@@ -173,7 +281,12 @@ public class GameManager : MonoBehaviour
         GamePanel.SetActive(true);
         isInGame = true;
         nextLevel();
+        healthyRespawnPoints = healthyRespawnPointsGraveyard;
         StartCoroutine(generateHealthy());
+        if (!Partida.isOnFirstScene())
+        {
+            StartCoroutine(pasarEscena(Partida.getScene(), true));
+        }
     }
 
     public void elegirDificultad()
@@ -206,7 +319,8 @@ public class GameManager : MonoBehaviour
         menuPpal.SetActive(true);
     }
 
-    public void pauseGame() {
+    public void pauseGame()
+    {
         GamePanel.SetActive(false);
         GamePausePanel.SetActive(true);
         Time.timeScale = 0;
@@ -214,18 +328,6 @@ public class GameManager : MonoBehaviour
 
     public void reanudarGame()
     {
-        GamePanel.SetActive(true);
-        GamePausePanel.SetActive(false);
-        Time.timeScale = 1;
-    }
-
-    public void save()
-    {
-        Scene scene = SceneManager.GetActiveScene();
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/savedGames.gd");
-        bf.Serialize(file, scene);
-        file.Close();
         GamePanel.SetActive(true);
         GamePausePanel.SetActive(false);
         Time.timeScale = 1;
