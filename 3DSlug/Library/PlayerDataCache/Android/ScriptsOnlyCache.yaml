@@ -46,10 +46,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -751,7 +749,7 @@ ScriptsOnlyBuild:
     className: Button
   - hash:
       serializedVersion: 2
-      Hash: 9a74af9d4c31c001b620c6f3a5599d00
+      Hash: 3fc3425be6c954f7c7c0a252c36a5e40
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -985,7 +983,7 @@ ScriptsOnlyBuild:
     className: cameraMove
   - hash:
       serializedVersion: 2
-      Hash: cc6ce190e2e24e54609f56e1d4692eed
+      Hash: b2aca95f9e44cdbd9f116f532e8b9920
     assemblyName: Assembly-CSharp.dll
     namespaceName: StarterAssets
     className: ThirdPersonController
@@ -1147,7 +1145,7 @@ ScriptsOnlyBuild:
     className: TMP_Settings
   - hash:
       serializedVersion: 2
-      Hash: 86f597450bced3b1dded116e27ee4670
+      Hash: fe268024430821320815e6c1504c55c6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerManager

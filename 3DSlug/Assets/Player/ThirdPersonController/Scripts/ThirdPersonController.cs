@@ -131,7 +131,7 @@ namespace StarterAssets
         private bool shotting = false;
         private bool isLaunching = false;
         private bool isAttacking = false;
-        private int numGranadas = 0;
+        public int numGranadas = 0;
 
         private void Start()
         {
@@ -223,6 +223,12 @@ namespace StarterAssets
             numGranadas++;
             contadorGranadas.text = numGranadas.ToString();
             mostrarMensaje("¡Has conseguido 1 granada!");
+        }
+
+        public void cargarGranadas(int numGranadas)
+        {
+            this.numGranadas=numGranadas;
+            contadorGranadas.text = numGranadas.ToString();
         }
 
         public void mostrarMensaje(string mensaje)

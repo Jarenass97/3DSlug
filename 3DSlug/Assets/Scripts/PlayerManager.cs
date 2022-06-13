@@ -18,7 +18,7 @@ public class PlayerManager : MonoBehaviour
     public Avatar attackAvatar;
     public Avatar movementAvatar;
     private AudioSource audio;
-    private int puntos = 0;
+    public int puntos = 0;
     public TextMeshProUGUI contadorPuntos;
     private List<GameObject> armas;
     private ThirdPersonController tpc;
