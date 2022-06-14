@@ -6,19 +6,31 @@ using UnityEngine;
 public class Partida
 {
     public static Partida current;
-    public int scene;
-    public int ronda;
-    public int puntos;
-    public int dificultad;
-    public int granadas;
+    private bool hasArma;
+    private int scene;
+    private int ronda;
+    private int puntos;
+    private int dificultad;
+    private int granadas;
 
     public Partida()
     {
+        this.hasArma = false;
         this.scene = 0;
         this.ronda = 0;
         this.puntos = 0;
         this.dificultad = 0;
         this.granadas = 0;
+    }
+
+    public static void setHasArma(bool hasArma)
+    {
+        current.hasArma = hasArma;
+    }
+
+    public static bool HasArma()
+    {
+        return current.hasArma;
     }
 
     public static void setScene(int scene)
@@ -70,5 +82,10 @@ public class Partida
     public static bool isOnFirstScene()
     {
         return current.scene == 0;
+    }
+
+    public static bool existenDatos()
+    {
+        return SaveLoad.existeFichero();
     }
 }

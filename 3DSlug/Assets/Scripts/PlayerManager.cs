@@ -111,4 +111,9 @@ public class PlayerManager : MonoBehaviour
     {
         shopActive.comprar();
     }
+
+    internal void activarMira()
+    {
+        puntoMira.SetActive(true);
+    }
 }

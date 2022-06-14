@@ -19,7 +19,7 @@ public static class SaveLoad
 
     public static void Load()
     {
-        if (File.Exists(fileName))
+        if (existeFichero())
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(fileName, FileMode.Open);
@@ -28,8 +28,13 @@ public static class SaveLoad
         }
     }
 
-    internal static void borrarDatos()
+    public static void borrarDatos()
     {
         File.Delete(fileName);
+    }
+
+    public static bool existeFichero()
+    {
+        return File.Exists(fileName);
     }
 }

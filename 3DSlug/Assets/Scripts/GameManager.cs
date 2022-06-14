@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     public GameObject menuPpal;
     public GameObject menuDiff;
     public GameObject loadScenePanel;
+    public GameObject arma;
+    public GameObject btnNuevaPartida;
     public TextMeshProUGUI msg;
     public TextMeshProUGUI btnComenzar;
     public TextMeshProUGUI contadorEnemigos;
@@ -63,13 +65,10 @@ public class GameManager : MonoBehaviour
     private void comprobarDatosGuardados()
     {
         SaveLoad.Load();
-        if (!Partida.isOnFirstScene())
+        if (Partida.existenDatos())
         {
+            btnNuevaPartida.SetActive(true);
             btnComenzar.text = "Continuar";
-            scene = Partida.getScene();
-            pm.addPuntos(Partida.getPuntos());
-            ronda = Partida.getRonda() - 1;
-            tpc.cargarGranadas(Partida.getGranadas());
             dificultad = Partida.getDificultad();
             switch (dificultad)
             {
@@ -83,12 +82,30 @@ public class GameManager : MonoBehaviour
                     txtButtonDificultad.text = "Dificultad: Difícil";
                     break;
             }
-
         }
     }
 
-    private void guardarPartida()
+    public void continuar()
     {
+        comprobarArma();
+        scene = Partida.getScene();
+        pm.addPuntos(Partida.getPuntos());
+        ronda = Partida.getRonda() - 1;
+        tpc.cargarGranadas(Partida.getGranadas());
+    }
+
+    private void comprobarArma()
+    {
+        if (Partida.HasArma())
+        {
+            tpc.equiparArma(arma);
+            pm.activarMira();
+        }
+    }
+
+    public void guardarPartida()
+    {
+        Partida.setHasArma(GameObject.Find("M1911") != null);
         Partida.setScene(scene);
         Partida.setPuntos(pm.puntos);
         Partida.setRonda(ronda);
@@ -125,7 +142,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator pasarEscena(int indexScene, bool carga = false)
     {
-        StartCoroutine(panelCarga(indexScene+1));
+        StartCoroutine(panelCarga(indexScene + 1));
         firstScene = false;
         tpc.enabled = false;
         tpc.mostrarMensaje("Ronda completada");
@@ -277,6 +294,7 @@ public class GameManager : MonoBehaviour
 
     public void comenzarPartida()
     {
+        if (Partida.existenDatos()) continuar();
         GameIntroPanel.SetActive(false);
         GamePanel.SetActive(true);
         isInGame = true;
@@ -287,6 +305,17 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(pasarEscena(Partida.getScene(), true));
         }
+    }
+
+    public void nuevaPartida()
+    {
+        SaveLoad.borrarDatos();
+        GameIntroPanel.SetActive(false);
+        GamePanel.SetActive(true);
+        isInGame = true;
+        nextLevel();
+        healthyRespawnPoints = healthyRespawnPointsGraveyard;
+        StartCoroutine(generateHealthy());
     }
 
     public void elegirDificultad()
