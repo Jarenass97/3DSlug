@@ -18,13 +18,14 @@ public class GameManager : MonoBehaviour
     public GameObject healthyObject;
     private int numEnemies = 0;
     private int ronda = 0;
-    private int rondaFinal = 100;
+    private int rondaFinal = 5;
     public int rondaCambioEscena = 3;
     public GameObject GamePanel;
     public GameObject GameOverPanel;
     public GameObject GameIntroPanel;
     public GameObject GamePausePanel;
     public GameObject GameWinPanel;
+    public GameObject RankingPanel;
     public GameObject menuPpal;
     public GameObject menuDiff;
     public GameObject loadScenePanel;
@@ -37,6 +38,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI resultadoPartida;
     public TextMeshProUGUI txtButtonDificultad;
     public TextMeshProUGUI txtNumMundo;
+    public TextMeshProUGUI txtRankingNombres;
+    public TextMeshProUGUI txtRankingPuntos;
+    public TMP_InputField txtIdentificadorRanking;
     private bool isGameOver = false;
     private ThirdPersonController tpc;
     private ArrayList healthyRespawnsUtilizados = new ArrayList();
@@ -360,5 +364,17 @@ public class GameManager : MonoBehaviour
         GamePanel.SetActive(true);
         GamePausePanel.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void toRanking()
+    {
+        GameOverPanel.SetActive(false);
+        GameWinPanel.SetActive(false);
+        RankingPanel.SetActive(true);
+    }
+
+    public void registrarEnRanking()
+    {
+
     }
 }
