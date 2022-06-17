@@ -351,11 +351,11 @@
     <Reference Include="Firebase.Firestore">
       <HintPath>Assets\Firebase\Plugins\Firebase.Firestore.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Tasks">
-      <HintPath>Assets\Parse\Plugins\dotNet45\Unity.Tasks.dll</HintPath>
-    </Reference>
     <Reference Include="Firebase.TaskExtension">
       <HintPath>Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Tasks">
+      <HintPath>Assets\Parse\Plugins\dotNet45\Unity.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="Google.MiniJson">
       <HintPath>Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>

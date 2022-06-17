@@ -11,9 +11,11 @@ public class Shop : MonoBehaviour
     private int precio = 1; // TODO cambiar
     private bool armaComprada = false;
     public TextMeshProUGUI txtMensaje;
+    public TextMeshProUGUI txtCompra;
 
     private void Start()
     {
+        txtCompra.text = "Compra este arma por " + precio + " puntos!";
         playerManager = GameObject.Find("PlayerArmature").GetComponent<PlayerManager>();
     }
 

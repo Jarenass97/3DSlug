@@ -70,8 +70,11 @@ public class PlayerManager : MonoBehaviour
 
     public void pierdeVida(int damage)
     {
-        vidaActual -= damage;
-        StartCoroutine(damageAnim());
+        if (!dead)
+        {
+            vidaActual -= damage;
+            StartCoroutine(damageAnim());
+        }
     }
     IEnumerator damageAnim()
     {
