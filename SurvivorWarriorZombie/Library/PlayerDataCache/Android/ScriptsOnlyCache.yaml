@@ -39,6 +39,7 @@ ScriptsOnlyBuild:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
     - TMPro.TMP_FontAsset
+    - TMPro.TMP_InputField
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
@@ -59,6 +60,8 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.LayoutElement
+    - UnityEngine.UI.RectMask2D
   sceneClasses:
     Assets/Scenes/Castle.unity:
     - Class: 1
@@ -137,83 +140,89 @@ ScriptsOnlyBuild:
     - Class: 111
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1500}
+      Script: {instanceID: 1698}
     - Class: 114
-      Script: {instanceID: 1502}
+      Script: {instanceID: 1700}
     - Class: 114
-      Script: {instanceID: 1560}
+      Script: {instanceID: 1758}
     - Class: 114
-      Script: {instanceID: 1876}
+      Script: {instanceID: 1798}
     - Class: 114
-      Script: {instanceID: 1958}
+      Script: {instanceID: 1908}
     - Class: 114
-      Script: {instanceID: 2112}
+      Script: {instanceID: 2086}
     - Class: 114
-      Script: {instanceID: 2136}
+      Script: {instanceID: 2168}
     - Class: 114
-      Script: {instanceID: 2236}
+      Script: {instanceID: 2322}
     - Class: 114
-      Script: {instanceID: 2306}
+      Script: {instanceID: 2346}
     - Class: 114
-      Script: {instanceID: 2478}
+      Script: {instanceID: 2470}
     - Class: 114
-      Script: {instanceID: 2590}
+      Script: {instanceID: 2542}
     - Class: 114
-      Script: {instanceID: 2630}
-    - Class: 114
-      Script: {instanceID: 2680}
-    - Class: 114
-      Script: {instanceID: 2726}
-    - Class: 114
-      Script: {instanceID: 2800}
-    - Class: 114
-      Script: {instanceID: 2808}
+      Script: {instanceID: 2722}
     - Class: 114
       Script: {instanceID: 2838}
     - Class: 114
-      Script: {instanceID: 2860}
+      Script: {instanceID: 2882}
     - Class: 114
-      Script: {instanceID: 2868}
+      Script: {instanceID: 2932}
     - Class: 114
-      Script: {instanceID: 2888}
+      Script: {instanceID: 2980}
     - Class: 114
-      Script: {instanceID: 3170}
+      Script: {instanceID: 3056}
     - Class: 114
-      Script: {instanceID: 3366}
+      Script: {instanceID: 3064}
     - Class: 114
-      Script: {instanceID: 3384}
+      Script: {instanceID: 3096}
     - Class: 114
-      Script: {instanceID: 3560}
+      Script: {instanceID: 3118}
     - Class: 114
-      Script: {instanceID: 3608}
+      Script: {instanceID: 3126}
     - Class: 114
-      Script: {instanceID: 3672}
+      Script: {instanceID: 3146}
     - Class: 114
-      Script: {instanceID: 3686}
+      Script: {instanceID: 3446}
     - Class: 114
-      Script: {instanceID: 3812}
+      Script: {instanceID: 3660}
     - Class: 114
-      Script: {instanceID: 3882}
+      Script: {instanceID: 3678}
     - Class: 114
-      Script: {instanceID: 4110}
+      Script: {instanceID: 3868}
     - Class: 114
-      Script: {instanceID: 4136}
+      Script: {instanceID: 3920}
     - Class: 114
-      Script: {instanceID: 4142}
+      Script: {instanceID: 3988}
     - Class: 114
-      Script: {instanceID: 4502}
+      Script: {instanceID: 4002}
     - Class: 114
-      Script: {instanceID: 4544}
+      Script: {instanceID: 4132}
     - Class: 114
-      Script: {instanceID: 4668}
+      Script: {instanceID: 4202}
     - Class: 114
-      Script: {instanceID: 4720}
+      Script: {instanceID: 4434}
     - Class: 114
-      Script: {instanceID: 4722}
+      Script: {instanceID: 4460}
     - Class: 114
-      Script: {instanceID: 5012}
+      Script: {instanceID: 4468}
     - Class: 114
-      Script: {instanceID: 5232}
+      Script: {instanceID: 4842}
+    - Class: 114
+      Script: {instanceID: 4886}
+    - Class: 114
+      Script: {instanceID: 5000}
+    - Class: 114
+      Script: {instanceID: 5022}
+    - Class: 114
+      Script: {instanceID: 5076}
+    - Class: 114
+      Script: {instanceID: 5078}
+    - Class: 114
+      Script: {instanceID: 5388}
+    - Class: 114
+      Script: {instanceID: 5624}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -539,7 +548,7 @@ ScriptsOnlyBuild:
     className: CinemachineSameAsFollowTarget
   - hash:
       serializedVersion: 2
-      Hash: d9bd04a68219aa4325621dcf459a5952
+      Hash: 27785084a97067fa41ecdbff7a19d232
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Shop
@@ -749,7 +758,7 @@ ScriptsOnlyBuild:
     className: Button
   - hash:
       serializedVersion: 2
-      Hash: 00063348b90f505baf401f829ad68cac
+      Hash: 8ec81f5e2bc5ea31490fe4efc8b6ab8d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -777,6 +786,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextContainer
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Firebase.Platform.dll
+    namespaceName: Firebase.Platform
+    className: FirebaseMonoBehaviour
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f

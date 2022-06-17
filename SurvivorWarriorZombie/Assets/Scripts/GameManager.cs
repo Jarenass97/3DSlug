@@ -6,6 +6,9 @@ using System.IO;
 using TMPro;
 using UnityEngine.SceneManagement;
 using StarterAssets;
+using Firebase;
+using Firebase.Firestore;
+using Firebase.Extensions;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,18 +21,20 @@ public class GameManager : MonoBehaviour
     public GameObject healthyObject;
     private int numEnemies = 0;
     private int ronda = 0;
-    private int rondaFinal = 100;
+    private int rondaFinal = 5;
     public int rondaCambioEscena = 3;
     public GameObject GamePanel;
     public GameObject GameOverPanel;
     public GameObject GameIntroPanel;
     public GameObject GamePausePanel;
     public GameObject GameWinPanel;
+    public GameObject RankingPanel;
     public GameObject menuPpal;
     public GameObject menuDiff;
     public GameObject loadScenePanel;
     public GameObject arma;
     public GameObject btnNuevaPartida;
+    public GameObject btnRegistrar;
     public TextMeshProUGUI msg;
     public TextMeshProUGUI btnComenzar;
     public TextMeshProUGUI contadorEnemigos;
@@ -37,6 +42,10 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI resultadoPartida;
     public TextMeshProUGUI txtButtonDificultad;
     public TextMeshProUGUI txtNumMundo;
+    public TextMeshProUGUI txtRankingNombres;
+    public TextMeshProUGUI txtRankingPuntos;
+    public TextMeshProUGUI txtBtnCancelConfirmRanking;
+    public TMP_InputField txtIdentificadorRanking;
     private bool isGameOver = false;
     private ThirdPersonController tpc;
     private ArrayList healthyRespawnsUtilizados = new ArrayList();
@@ -45,8 +54,11 @@ public class GameManager : MonoBehaviour
     private int scene = 0;
     private int dificultad = 1;
     private PlayerManager pm;
+    private FirebaseFirestore db;
+    private string collection = "ranking";
     void Start()
     {
+        firebaseInit();
         Partida.current = new Partida();
         tpc = GameObject.Find("PlayerArmature").GetComponent<ThirdPersonController>();
         pm = GameObject.Find("PlayerArmature").GetComponent<PlayerManager>();
@@ -56,6 +68,25 @@ public class GameManager : MonoBehaviour
         comprobarDatosGuardados();
     }
 
+    async void firebaseInit()
+    {
+        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+        {
+            var dependencyStatus = task.Result;
+            if (dependencyStatus == Firebase.DependencyStatus.Available)
+            {
+                db = FirebaseFirestore.DefaultInstance;
+            }
+            else
+            {
+                UnityEngine.Debug.LogError(System.String.Format(
+                  "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
+                // Firebase Unity SDK is not safe to use here.
+            }
+        });
+    }
+
+    //TODO eliminar
     IEnumerator prueba()
     {
         yield return new WaitForSeconds(5);
@@ -112,6 +143,7 @@ public class GameManager : MonoBehaviour
         Partida.setDificultad(dificultad);
         Partida.setGranadas(tpc.numGranadas);
         SaveLoad.save();
+        RestartGame();
     }
 
     void Update()
@@ -164,7 +196,6 @@ public class GameManager : MonoBehaviour
         if (!carga)
         {
             scene++;
-            guardarPartida();
         }
     }
 
@@ -360,5 +391,58 @@ public class GameManager : MonoBehaviour
         GamePanel.SetActive(true);
         GamePausePanel.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void toRanking()
+    {
+        GameOverPanel.SetActive(false);
+        GameWinPanel.SetActive(false);
+        RankingPanel.SetActive(true);
+        cargarRanking();
+    }
+
+    private string idNombre = "nombre";
+    private string idPuntos = "puntos";
+
+    private void cargarRanking()
+    {
+        db.Collection(collection).OrderByDescending(idPuntos).Limit(10).GetSnapshotAsync().ContinueWithOnMainThread(task =>
+        {
+            string rankingNombres = "";
+            string rankingPuntos = "";
+            int contador = 1;
+            QuerySnapshot qSnap = task.Result;
+            Debug.Log(task.Result.ToString());
+            foreach (DocumentSnapshot snap in qSnap)
+            {
+                Dictionary<string, object> reg = snap.ToDictionary();
+                rankingNombres += contador++ + ". " + reg[idNombre] + "\n";
+                rankingPuntos += reg[idPuntos] + "\n";
+            }
+            txtRankingNombres.text = rankingNombres;
+            txtRankingPuntos.text = rankingPuntos;
+            Debug.Log(rankingNombres);
+            Debug.Log(rankingPuntos);
+        });
+    }
+
+    public void registrarEnRanking()
+    {
+        string nombre = txtIdentificadorRanking.text;
+        if (!string.IsNullOrEmpty(nombre))
+        {
+            Dictionary<string, object> reg = new Dictionary<string, object>
+            {
+                {idNombre, nombre},
+                {idPuntos, pm.puntos}
+            };
+            db.Collection(collection).Document(nombre + "-" + pm.puntos)
+                .SetAsync(reg).ContinueWithOnMainThread(task =>
+                {
+                    cargarRanking();
+                    btnRegistrar.SetActive(false);
+                    txtBtnCancelConfirmRanking.text = "Confirmar";
+                });
+        }
     }
 }
