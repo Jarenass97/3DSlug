@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using StarterAssets;
 using System;
 using System.Collections;
@@ -21,7 +22,6 @@ public class PlayerManager : MonoBehaviour
     public int puntos = 0;
     public int puntosTotales = 0;
     public TextMeshProUGUI contadorPuntos;
-    private List<GameObject> armas;
     private ThirdPersonController tpc;
     public GameObject puntoMira;
 
@@ -31,7 +31,6 @@ public class PlayerManager : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         anim = GetComponent<Animator>();
         audio = GetComponent<AudioSource>();
-        armas = new List<GameObject>();
         tpc = GetComponent<ThirdPersonController>();
     }
 
@@ -40,11 +39,10 @@ public class PlayerManager : MonoBehaviour
         return precio <= puntos;
     }
 
-    internal void venderArma(GameObject arma, int precio)
+    internal void venderArma(GameObject arma, int precio, Afinidad afinidad)
     {
         addPuntos(-precio);
-        armas.Add(arma);
-        tpc.equiparArma(arma);
+        tpc.equiparArma(arma, afinidad);
         puntoMira.SetActive(true);
     }
 

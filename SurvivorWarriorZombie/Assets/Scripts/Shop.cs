@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,14 +10,16 @@ public class Shop : MonoBehaviour
     public GameObject panelTienda;
     public GameObject arma;
     private PlayerManager playerManager;
-    private int precioBase = 1; // TODO cambiar
+    public int precioBase;
     private bool armaComprada = false;
     public TextMeshProUGUI txtMensaje;
-    public TextMeshProUGUI txtCompra;
+    private TextMeshProUGUI txtCompra;
+    public Afinidad afinidad;
 
     private void Start()
     {
         playerManager = GameObject.Find("PlayerArmature").GetComponent<PlayerManager>();
+        txtCompra = panelTienda.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,10 +27,35 @@ public class Shop : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             int precio = precioSegunDificultad();
-            txtCompra.text = "Compra este arma por " + precio + " puntos!";
+            txtCompra.text = setMensaje(precio);
             if (!armaComprada) panelTienda.SetActive(true);
-            else mostrarMensaje("Ya tienes este arma");
+            else mostrarMensaje("Ya está en tu posesión");
         }
+        //StartCoroutine(prueba());
+    }
+
+    //TODO eliminar
+    IEnumerator prueba()
+    {
+        yield return new WaitForSeconds(0.2f);
+        playerManager.comprarArma();
+    }
+    private string setMensaje(int precio)
+    {
+        string text = "";
+        switch (afinidad)
+        {
+            case Afinidad.SIN_AFINIDAD:
+                text = "Compra este arma por " + precio + " puntos!";
+                break;
+            case Afinidad.VENENO:
+                text = "Concede afinidad tóxica a tu pistola por " + precio + " puntos!";
+                break;
+            case Afinidad.FUEGO:
+                text = "Concede afinidad ínflamable a tu pistola por " + precio + " puntos!";
+                break;
+        }
+        return text;
     }
 
     private int precioSegunDificultad()
@@ -59,19 +87,27 @@ public class Shop : MonoBehaviour
         int precio = precioSegunDificultad();
         if (playerManager.puedePagar(precio))
         {
-            playerManager.venderArma(arma, precio);
+            playerManager.venderArma(arma, precio, afinidad);
             armaComprada = true;
-            mostrarMensaje("Arma comprada");
+            mostrarMensaje("Compra realizada con éxito");
             panelTienda.SetActive(false);
         }
         else
         {
-            mostrarMensaje("No tienes suficientes puntos para adquirir este arma");
+            mostrarMensaje("No tienes suficientes puntos");
             panelTienda.SetActive(false);
         }
     }
     private void mostrarMensaje(string mensaje)
     {
         txtMensaje.GetComponent<Mensaje>().mostrar(mensaje);
+    }
+
+    public void setNewObjects(GameObject shopPanel, TextMeshProUGUI txtMensaje)
+    {
+        this.panelTienda = shopPanel;
+        this.txtMensaje = txtMensaje;
+        txtCompra = panelTienda.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+        playerManager = GameObject.Find("PlayerArmature").GetComponent<PlayerManager>();
     }
 }

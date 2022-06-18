@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public GameObject GamePausePanel;
     public GameObject GameWinPanel;
     public GameObject RankingPanel;
+    public GameObject ShopPanel;
     public GameObject menuPpal;
     public GameObject menuDiff;
     public GameObject loadScenePanel;
@@ -130,7 +131,7 @@ public class GameManager : MonoBehaviour
     {
         if (Partida.HasArma())
         {
-            tpc.equiparArma(arma);
+            tpc.equiparArma(arma, Partida.getAfinidad());
             pm.activarMira();
         }
     }
@@ -144,6 +145,7 @@ public class GameManager : MonoBehaviour
         Partida.setRonda(ronda);
         Partida.setDificultad(dificultad);
         Partida.setGranadas(tpc.numGranadas);
+        Partida.setAfinidad(GameObject.Find("laserMira").GetComponent<LaserMira>().getAfinidad());
         SaveLoad.save();
         RestartGame();
     }
@@ -194,11 +196,18 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(indexScene);
         yield return new WaitForSeconds(0.1f);
         cargarNewRespawns();
+        cargarShopsData();
         nextLevel(carga);
         if (!carga)
         {
             scene++;
         }
+    }
+
+    private void cargarShopsData()
+    {
+        Shop nuevaTienda = GameObject.Find("ShopVeneno").GetComponent<Shop>();
+        nuevaTienda.setNewObjects(ShopPanel, msg);
     }
 
     IEnumerator panelCarga(int numScene)
