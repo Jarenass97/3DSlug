@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class Partida
     private int puntosTotales;
     private int dificultad;
     private int granadas;
+    private Afinidad afinidad;
 
     public Partida()
     {
@@ -23,6 +25,7 @@ public class Partida
         this.puntosTotales = 0;
         this.dificultad = 0;
         this.granadas = 0;
+        this.afinidad = Afinidad.SIN_AFINIDAD;
     }
 
     public static void setHasArma(bool hasArma)
@@ -44,6 +47,16 @@ public class Partida
     {
         return current.scene;
     }
+
+    public static Afinidad getAfinidad()
+    {
+        return current.afinidad;
+    }
+    public static void setAfinidad(Afinidad afinidad)
+    {
+        current.afinidad = afinidad;
+    }
+
     public static void setRonda(int ronda)
     {
         current.ronda = ronda;
@@ -61,7 +74,7 @@ public class Partida
     public static int getPuntos()
     {
         return current.puntos;
-    } 
+    }
     public static void setPuntosTotales(int puntos)
     {
         current.puntosTotales = puntos;

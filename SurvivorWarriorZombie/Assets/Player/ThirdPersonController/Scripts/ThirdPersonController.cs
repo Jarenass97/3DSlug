@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using Assets.Scripts;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 using TMPro;
@@ -160,11 +161,15 @@ namespace StarterAssets
             if (pistolaEquipada) mirarDondeCamara();
         }
 
-        internal void equiparArma(GameObject arma)
+        internal void equiparArma(GameObject arma, Afinidad afinidad)
         {
-            pistola = Instantiate(arma, portaPistola.transform);
-            pistolaEquipada = true;
+            if (!pistolaEquipada)
+            {
+                pistola = Instantiate(arma, portaPistola.transform);
+                pistolaEquipada = true;
+            }
             laserMira.SetActive(true);
+            laserMira.GetComponent<LaserMira>().setAfinidad(afinidad);
         }
 
         public bool isShotting()

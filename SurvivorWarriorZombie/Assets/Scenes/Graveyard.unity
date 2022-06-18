@@ -39152,6 +39152,7 @@ MonoBehaviour:
   GamePausePanel: {fileID: 4804737918816351921}
   GameWinPanel: {fileID: 4804737918816351918}
   RankingPanel: {fileID: 4804737918816351926}
+  ShopPanel: {fileID: 880437384}
   menuPpal: {fileID: 904920155}
   menuDiff: {fileID: 1836652716}
   loadScenePanel: {fileID: 1691548067}
@@ -39169,6 +39170,7 @@ MonoBehaviour:
   txtRankingPuntos: {fileID: 308804602}
   txtBtnCancelConfirmRanking: {fileID: 4804737918816351927}
   txtIdentificadorRanking: {fileID: 4804737918816351925}
+  dificultad: 1
 --- !u!4 &1563439963
 Transform:
   m_ObjectHideFlags: 0
@@ -53651,6 +53653,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 910989799}
     - target: {fileID: 4082555555465969344, guid: 2ef7c31a3e99dd14fa075f3ce66bbd73, type: 3}
+      propertyPath: precioBase
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4082555555465969344, guid: 2ef7c31a3e99dd14fa075f3ce66bbd73, type: 3}
       propertyPath: txtMensaje
       value: 
       objectReference: {fileID: 4804737918816351919}
@@ -53923,6 +53929,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: btnRestart
       objectReference: {fileID: 0}
+    - target: {fileID: 2518900126468232085, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
+      propertyPath: fuego
+      value: 
+      objectReference: {fileID: 2948143413684556250, guid: 8e0108bbd2f1f49478c46d234da9543e, type: 3}
+    - target: {fileID: 2518900126468232085, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
+      propertyPath: "nubeT\xF3xica"
+      value: 
+      objectReference: {fileID: 6774277444820078268, guid: 1b3f910367115374b97329eadffe2f90, type: 3}
     - target: {fileID: 2591724394053779358, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -58071,6 +58085,10 @@ PrefabInstance:
     - target: {fileID: 7996441834644850535, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: RestartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027552904078214251, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 166.66
       objectReference: {fileID: 0}
     - target: {fileID: 8062162404071413581, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
       propertyPath: m_AnchoredPosition.y
