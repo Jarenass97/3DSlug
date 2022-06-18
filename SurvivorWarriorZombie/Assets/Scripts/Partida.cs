@@ -10,6 +10,7 @@ public class Partida
     private int scene;
     private int ronda;
     private int puntos;
+    private int puntosTotales;
     private int dificultad;
     private int granadas;
 
@@ -19,6 +20,7 @@ public class Partida
         this.scene = 0;
         this.ronda = 0;
         this.puntos = 0;
+        this.puntosTotales = 0;
         this.dificultad = 0;
         this.granadas = 0;
     }
@@ -59,6 +61,15 @@ public class Partida
     public static int getPuntos()
     {
         return current.puntos;
+    } 
+    public static void setPuntosTotales(int puntos)
+    {
+        current.puntosTotales = puntos;
+    }
+
+    public static int getPuntosTotales()
+    {
+        return current.puntosTotales;
     }
     public static void setDificultad(int dificultad)
     {

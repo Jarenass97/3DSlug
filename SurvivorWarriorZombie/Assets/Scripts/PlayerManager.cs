@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour
     public Avatar movementAvatar;
     private AudioSource audio;
     public int puntos = 0;
+    public int puntosTotales = 0;
     public TextMeshProUGUI contadorPuntos;
     private List<GameObject> armas;
     private ThirdPersonController tpc;
@@ -98,6 +99,7 @@ public class PlayerManager : MonoBehaviour
     {
         this.puntos += puntos;
         contadorPuntos.text = "Puntos: " + this.puntos;
+        if (puntos >= 0) puntosTotales += puntos;
     }
     private void OnTriggerEnter(Collider other)
     {

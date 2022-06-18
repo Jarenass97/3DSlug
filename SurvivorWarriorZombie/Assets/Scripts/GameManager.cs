@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     private bool isInGame = false;
     private bool firstScene = true;
     private int scene = 0;
-    private int dificultad = 1;
+    public int dificultad = 1;
     private PlayerManager pm;
     private FirebaseFirestore db;
     private string collection = "ranking";
@@ -121,6 +121,7 @@ public class GameManager : MonoBehaviour
         comprobarArma();
         scene = Partida.getScene();
         pm.addPuntos(Partida.getPuntos());
+        pm.puntosTotales = Partida.getPuntosTotales();
         ronda = Partida.getRonda() - 1;
         tpc.cargarGranadas(Partida.getGranadas());
     }
@@ -139,6 +140,7 @@ public class GameManager : MonoBehaviour
         Partida.setHasArma(GameObject.Find("M1911") != null);
         Partida.setScene(scene);
         Partida.setPuntos(pm.puntos);
+        Partida.setPuntosTotales(pm.puntosTotales);
         Partida.setRonda(ronda);
         Partida.setDificultad(dificultad);
         Partida.setGranadas(tpc.numGranadas);
@@ -434,9 +436,9 @@ public class GameManager : MonoBehaviour
             Dictionary<string, object> reg = new Dictionary<string, object>
             {
                 {idNombre, nombre},
-                {idPuntos, pm.puntos}
+                {idPuntos, pm.puntosTotales}
             };
-            db.Collection(collection).Document(nombre + "-" + pm.puntos)
+            db.Collection(collection).Document(nombre + "-" + pm.puntosTotales)
                 .SetAsync(reg).ContinueWithOnMainThread(task =>
                 {
                     cargarRanking();
