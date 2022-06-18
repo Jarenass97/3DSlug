@@ -31,15 +31,8 @@ public class Shop : MonoBehaviour
             if (!armaComprada) panelTienda.SetActive(true);
             else mostrarMensaje("Ya está en tu posesión");
         }
-        //StartCoroutine(prueba());
     }
 
-    //TODO eliminar
-    IEnumerator prueba()
-    {
-        yield return new WaitForSeconds(0.2f);
-        playerManager.comprarArma();
-    }
     private string setMensaje(int precio)
     {
         string text = "";

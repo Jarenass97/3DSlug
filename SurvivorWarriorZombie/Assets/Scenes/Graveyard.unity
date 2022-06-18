@@ -53930,6 +53930,10 @@ PrefabInstance:
       value: btnRestart
       objectReference: {fileID: 0}
     - target: {fileID: 2518900126468232085, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
+      propertyPath: fuego
+      value: 
+      objectReference: {fileID: 2948143413684556250, guid: 8e0108bbd2f1f49478c46d234da9543e, type: 3}
+    - target: {fileID: 2518900126468232085, guid: 8cd4c1ac86972084facec694e3c78e26, type: 3}
       propertyPath: "nubeT\xF3xica"
       value: 
       objectReference: {fileID: 6774277444820078268, guid: 1b3f910367115374b97329eadffe2f90, type: 3}

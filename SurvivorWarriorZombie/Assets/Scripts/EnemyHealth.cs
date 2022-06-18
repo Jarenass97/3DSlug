@@ -12,7 +12,7 @@ public class EnemyHealth : MonoBehaviour
     private GameManager gameManager;
     private GameObject Player;
     private ThirdPersonController tpc;
-    private bool isDead = false;
+    public bool isDead = false;
     void Start()
     {
         vidaActual = vidaMaxima;

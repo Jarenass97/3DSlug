@@ -19,7 +19,6 @@ public class nubeVenenosa : MonoBehaviour
         {
             EnemyHealth eh= other.GetComponent<EnemyHealth>();
             eh.recibeDamage(damage);
-            Debug.Log("SUFRE MAMON");
         }
     }
 

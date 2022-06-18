@@ -4,6 +4,7 @@ ScriptsOnlyBuild:
     - BasicRigidBodyPush
     - EnemyHealth
     - EspadonAttack
+    - Fuego
     - GameManager
     - GranadeAction
     - HealthyProperties
@@ -94,9 +95,11 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 2930}
+      Script: {instanceID: 2932}
     - Class: 114
-      Script: {instanceID: 26760}
+      Script: {instanceID: 4618}
+    - Class: 114
+      Script: {instanceID: 31272}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -165,59 +168,59 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1796}
     - Class: 114
-      Script: {instanceID: 1906}
+      Script: {instanceID: 1908}
     - Class: 114
-      Script: {instanceID: 2084}
+      Script: {instanceID: 2086}
     - Class: 114
-      Script: {instanceID: 2166}
+      Script: {instanceID: 2168}
     - Class: 114
-      Script: {instanceID: 2320}
+      Script: {instanceID: 2322}
     - Class: 114
-      Script: {instanceID: 2344}
+      Script: {instanceID: 2346}
     - Class: 114
-      Script: {instanceID: 2468}
+      Script: {instanceID: 2470}
     - Class: 114
-      Script: {instanceID: 2540}
+      Script: {instanceID: 2542}
     - Class: 114
-      Script: {instanceID: 2720}
+      Script: {instanceID: 2722}
     - Class: 114
-      Script: {instanceID: 2836}
+      Script: {instanceID: 2838}
     - Class: 114
-      Script: {instanceID: 2880}
+      Script: {instanceID: 2882}
     - Class: 114
-      Script: {instanceID: 2930}
+      Script: {instanceID: 2932}
     - Class: 114
-      Script: {instanceID: 2978}
+      Script: {instanceID: 2980}
     - Class: 114
-      Script: {instanceID: 3054}
+      Script: {instanceID: 3056}
     - Class: 114
-      Script: {instanceID: 3062}
+      Script: {instanceID: 3064}
     - Class: 114
-      Script: {instanceID: 3094}
+      Script: {instanceID: 3096}
     - Class: 114
-      Script: {instanceID: 3116}
+      Script: {instanceID: 3118}
     - Class: 114
-      Script: {instanceID: 3124}
+      Script: {instanceID: 3126}
     - Class: 114
-      Script: {instanceID: 3144}
+      Script: {instanceID: 3146}
     - Class: 114
-      Script: {instanceID: 3444}
+      Script: {instanceID: 3446}
     - Class: 114
-      Script: {instanceID: 3658}
+      Script: {instanceID: 3660}
     - Class: 114
-      Script: {instanceID: 3676}
+      Script: {instanceID: 3678}
     - Class: 114
-      Script: {instanceID: 3866}
+      Script: {instanceID: 3868}
     - Class: 114
-      Script: {instanceID: 3918}
+      Script: {instanceID: 3920}
     - Class: 114
-      Script: {instanceID: 3986}
+      Script: {instanceID: 3988}
     - Class: 114
-      Script: {instanceID: 4000}
+      Script: {instanceID: 4002}
     - Class: 114
-      Script: {instanceID: 4130}
+      Script: {instanceID: 4132}
     - Class: 114
-      Script: {instanceID: 4200}
+      Script: {instanceID: 4202}
     - Class: 114
       Script: {instanceID: 4434}
     - Class: 114
@@ -225,23 +228,25 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 4468}
     - Class: 114
-      Script: {instanceID: 4842}
+      Script: {instanceID: 4618}
     - Class: 114
-      Script: {instanceID: 4886}
+      Script: {instanceID: 4844}
     - Class: 114
-      Script: {instanceID: 5000}
+      Script: {instanceID: 4888}
     - Class: 114
-      Script: {instanceID: 5022}
+      Script: {instanceID: 5002}
     - Class: 114
-      Script: {instanceID: 5076}
+      Script: {instanceID: 5024}
     - Class: 114
       Script: {instanceID: 5078}
     - Class: 114
-      Script: {instanceID: 5388}
+      Script: {instanceID: 5080}
     - Class: 114
-      Script: {instanceID: 5624}
+      Script: {instanceID: 5390}
     - Class: 114
-      Script: {instanceID: 26760}
+      Script: {instanceID: 5626}
+    - Class: 114
+      Script: {instanceID: 31272}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -489,7 +494,7 @@ ScriptsOnlyBuild:
     className: Text
   - hash:
       serializedVersion: 2
-      Hash: e54f92528f1abc3a98ea9934bcbad797
+      Hash: 86f3816f3f7013affcfc50ce55bf8aae
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LaserMira
@@ -1059,6 +1064,12 @@ ScriptsOnlyBuild:
     className: CinemachineTrackedDolly
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: nubeVenenosa
+  - hash:
+      serializedVersion: 2
       Hash: cd0ecdca0166232906c6f2df9dddc3d3
     assemblyName: Unity.InputSystem.dll
     namespaceName: UnityEngine.InputSystem.Editor
@@ -1125,7 +1136,7 @@ ScriptsOnlyBuild:
     className: ScrollRect
   - hash:
       serializedVersion: 2
-      Hash: 9709ca9071b26f5ee95a57d2980793b4
+      Hash: f5f3ca8f9787a5c2c0b1c35af1c43a66
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyHealth
@@ -1344,9 +1355,9 @@ ScriptsOnlyBuild:
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: nubeVenenosa
+    className: Fuego
   platform: 13
   scenePathNames:
   - Assets/Scenes/Graveyard.unity
   - Assets/Scenes/Castle.unity
-  playerPath: C:/Users/jorge/Desktop/proyecto DAM/SWZPruebaAfinidades.apk
+  playerPath: C:/Users/jorge/Desktop/proyecto DAM/SWZ.apk

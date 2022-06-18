@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         tpc = GameObject.Find("PlayerArmature").GetComponent<ThirdPersonController>();
         pm = GameObject.Find("PlayerArmature").GetComponent<PlayerManager>();
         txtButtonDificultad.text = "Dificultad: Fácil";
-        //comenzarPartida();
+        //comenzarPartida();//TODO borrar
         //StartCoroutine(prueba());
         comprobarDatosGuardados();
     }
@@ -206,8 +206,10 @@ public class GameManager : MonoBehaviour
 
     private void cargarShopsData()
     {
-        Shop nuevaTienda = GameObject.Find("ShopVeneno").GetComponent<Shop>();
-        nuevaTienda.setNewObjects(ShopPanel, msg);
+        Shop tiendaVeneno = GameObject.Find("ShopVeneno").GetComponent<Shop>();
+        Shop tiendaFuego = GameObject.Find("ShopFuego").GetComponent<Shop>();
+        tiendaVeneno.setNewObjects(ShopPanel, msg);
+        tiendaFuego.setNewObjects(ShopPanel, msg);
     }
 
     IEnumerator panelCarga(int numScene)

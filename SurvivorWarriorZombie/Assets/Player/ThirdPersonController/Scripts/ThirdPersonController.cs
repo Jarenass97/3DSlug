@@ -167,9 +167,9 @@ namespace StarterAssets
             {
                 pistola = Instantiate(arma, portaPistola.transform);
                 pistolaEquipada = true;
-                laserMira.SetActive(true);
-                laserMira.GetComponent<LaserMira>().setAfinidad(afinidad);
             }
+            laserMira.SetActive(true);
+            laserMira.GetComponent<LaserMira>().setAfinidad(afinidad);
         }
 
         public bool isShotting()
