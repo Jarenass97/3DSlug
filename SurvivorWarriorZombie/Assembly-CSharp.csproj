@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Mensaje.cs" />
     <Compile Include="Assets\Scripts\Shop.cs" />
     <Compile Include="Assets\EffectExamples\Shared\Scripts\DecalDestroyer.cs" />
+    <Compile Include="Assets\Scripts\Fuego.cs" />
     <Compile Include="Assets\Player\ThirdPersonController\Scripts\BasicRigidBodyPush.cs" />
     <Compile Include="Assets\Scripts\HealthyProperties.cs" />
     <Compile Include="Assets\Player\TutorialInfo\Scripts\Readme.cs" />
@@ -89,7 +90,6 @@
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\zombieMovement.cs" />
     <Compile Include="Assets\EffectExamples\Shared\Scripts\GunAim.cs" />
-    <Compile Include="Assets\Scripts\Fuego.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

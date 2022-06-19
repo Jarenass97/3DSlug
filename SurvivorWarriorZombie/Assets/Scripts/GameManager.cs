@@ -64,8 +64,6 @@ public class GameManager : MonoBehaviour
         tpc = GameObject.Find("PlayerArmature").GetComponent<ThirdPersonController>();
         pm = GameObject.Find("PlayerArmature").GetComponent<PlayerManager>();
         txtButtonDificultad.text = "Dificultad: Fácil";
-        //comenzarPartida();//TODO borrar
-        //StartCoroutine(prueba());
         comprobarDatosGuardados();
     }
 
@@ -85,13 +83,6 @@ public class GameManager : MonoBehaviour
                 // Firebase Unity SDK is not safe to use here.
             }
         });
-    }
-
-    //TODO eliminar
-    IEnumerator prueba()
-    {
-        yield return new WaitForSeconds(5);
-        StartCoroutine(pasarEscena(scene + 1));
     }
 
     private void comprobarDatosGuardados()

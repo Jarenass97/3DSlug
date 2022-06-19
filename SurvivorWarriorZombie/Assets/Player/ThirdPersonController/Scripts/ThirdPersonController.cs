@@ -201,7 +201,6 @@ namespace StarterAssets
             transform.LookAt(new Vector3(x, 0, z));
         }
 
-        //TODO borrar
         public void lanzagranada()
         {
             if (!isLaunching)
@@ -215,7 +214,7 @@ namespace StarterAssets
 
         private void launch()
         {
-            if (_input.launch && !isLaunching /*&& numGranadas>0*/)//TODO descomentar
+            if (_input.launch && !isLaunching && numGranadas>0)
             {
                 numGranadas--;
                 contadorGranadas.text = numGranadas.ToString();
